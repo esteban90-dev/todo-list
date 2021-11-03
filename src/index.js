@@ -1,20 +1,20 @@
-import Todo from './todo-factory.js';
+import TodoModel from './todo-model.js';
 
-var todo1 = Todo('take out the trash','take the trash to the garbage can','today','low');
-todo1.setTitle('go get groceries');
-console.log(todo1.getTitle());
+TodoModel.create('take out the trash','all the way to the trash can','today','low');
+TodoModel.create('take out the recycling','all the way to the trash can','today','low');
+TodoModel.create('take out the girlfriend','all the way to the trash can','today','low');
 
-todo1.setDescription('go to whole foods');
-console.log(todo1.getDescription());
+TodoModel.destroy(0);
 
-todo1.setDueDate('tomorrow');
-console.log(todo1.getDueDate());
+console.log(TodoModel.read(0).getTitle());
+console.log(TodoModel.read(1).getTitle());
 
-todo1.setPriority('medium');
-console.log(todo1.getPriority());
 
-todo1.setComplete();
-console.log(todo1.getIsComplete());
 
-todo1.setIncomplete();
-console.log(todo1.getIsComplete());
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-function Todo(title, description, dueDate, priority){
+function TodoFactory(title, description, dueDate, priority){
   var title = title;
   var description = description;
   var dueDate = dueDate;
@@ -52,4 +52,4 @@ function Todo(title, description, dueDate, priority){
   return { getTitle, setTitle, getDescription, setDescription, getDueDate, setDueDate, getPriority, setPriority, getIsComplete, setComplete, setIncomplete };
 }
 
-export default Todo;
+export default TodoFactory;

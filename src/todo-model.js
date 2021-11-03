@@ -1,6 +1,6 @@
 import TodoFactory from './todo-factory.js';
 
-var TodoModel = (function(){
+const TodoModel = (function(){
   var todos = [];
   var todoFactory = TodoFactory;
 

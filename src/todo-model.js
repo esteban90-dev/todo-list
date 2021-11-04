@@ -31,7 +31,11 @@ const TodoModel = (function(){
     todos = temp;
   }
 
-  return { create, read, update, destroy }
+  function getTodos(){
+    return todos;
+  }
+
+  return { create, read, update, destroy, getTodos }
 })(TodoFactory);
 
 export default TodoModel;

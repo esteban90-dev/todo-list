@@ -16,7 +16,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo_model_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo-model.js */ \"./src/todo-model.js\");\n\n\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create('take out the trash','all the way to the trash can','today','low');\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create('take out the recycling','all the way to the trash can','today','low');\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create('take out the girlfriend','all the way to the trash can','today','low');\n\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].destroy(0);\n\nconsole.log(_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].read(0).getTitle());\nconsole.log(_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].read(1).getTitle());\n\n\n\n\n\n\n\n\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo_model_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo-model.js */ \"./src/todo-model.js\");\n/* harmony import */ var _todo_index_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo-index-view.js */ \"./src/todo-index-view.js\");\n\n\n\n\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create(\"first task\",\"blah\",\"today\",\"low\");\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create(\"second task\",\"blah\",\"today\",\"low\");\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create(\"third task\",\"blah\",\"today\",\"low\");\n_todo_index_view_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].render(_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getTodos());\n\n\n\n\n\n\n\n\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ }),
 
@@ -30,13 +30,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/todo-index-view.js":
+/*!********************************!*\
+  !*** ./src/todo-index-view.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst TodoIndexView = (function(){\n  const app = document.querySelector(\"#app\");\n\n  function render(todos){\n    _renderTodos(todos);\n  \n    //display 'new todo' button\n    const createButton = document.createElement('input');\n    createButton.setAttribute(\"type\",\"button\");\n    createButton.setAttribute(\"value\",\"new todo\");\n    app.appendChild(createButton);\n  }\n\n  function _renderTodos(todos){\n    for(let i=0; i<todos.length; i++){\n      let p = document.createElement('p');\n      p.innerHTML = todos[i].getTitle();\n      app.appendChild(p);\n    }\n  }\n\n  return { render };\n})();\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TodoIndexView);\n\n//# sourceURL=webpack://todo-list/./src/todo-index-view.js?");
+
+/***/ }),
+
 /***/ "./src/todo-model.js":
 /*!***************************!*\
   !*** ./src/todo-model.js ***!
   \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _todo_factory_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo-factory.js */ \"./src/todo-factory.js\");\n\n\nconst TodoModel = (function(){\n  var todos = [];\n  var todoFactory = _todo_factory_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\n\n  function create(title, description, dueDate, priority){\n    var todo = todoFactory(title, description, dueDate, priority);\n    todos.push(todo);\n  }\n\n  function read(id){\n    return todos[id];\n  }\n\n  function update(id, title, description, dueDate, priority){\n    var todo = read(id);\n    todo.setTitle(title);\n    todo.setDescription(description);\n    todo.setDueDate(dueDate);\n    todo.setPriority(priority);\n  }\n\n  function destroy(id){\n    var temp = [];\n    for(let i=0; i<todos.length; i++){\n      if (i != id) {\n        temp.push(todos[i]);\n      }\n    }\n    todos = temp;\n  }\n\n  return { create, read, update, destroy }\n})(_todo_factory_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TodoModel);\n\n\n//# sourceURL=webpack://todo-list/./src/todo-model.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _todo_factory_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo-factory.js */ \"./src/todo-factory.js\");\n\n\nconst TodoModel = (function(){\n  var todos = [];\n  var todoFactory = _todo_factory_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\n\n  function create(title, description, dueDate, priority){\n    var todo = todoFactory(title, description, dueDate, priority);\n    todos.push(todo);\n  }\n\n  function read(id){\n    return todos[id];\n  }\n\n  function update(id, title, description, dueDate, priority){\n    var todo = read(id);\n    todo.setTitle(title);\n    todo.setDescription(description);\n    todo.setDueDate(dueDate);\n    todo.setPriority(priority);\n  }\n\n  function destroy(id){\n    var temp = [];\n    for(let i=0; i<todos.length; i++){\n      if (i != id) {\n        temp.push(todos[i]);\n      }\n    }\n    todos = temp;\n  }\n\n  function getTodos(){\n    return todos;\n  }\n\n  return { create, read, update, destroy, getTodos }\n})(_todo_factory_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TodoModel);\n\n\n//# sourceURL=webpack://todo-list/./src/todo-model.js?");
 
 /***/ })
 

@@ -1,13 +1,11 @@
 import TodoModel from './todo-model.js';
+import TodoIndexView from './todo-index-view.js';
 
-TodoModel.create('take out the trash','all the way to the trash can','today','low');
-TodoModel.create('take out the recycling','all the way to the trash can','today','low');
-TodoModel.create('take out the girlfriend','all the way to the trash can','today','low');
 
-TodoModel.destroy(0);
-
-console.log(TodoModel.read(0).getTitle());
-console.log(TodoModel.read(1).getTitle());
+TodoModel.create("first task","blah","today","low");
+TodoModel.create("second task","blah","today","low");
+TodoModel.create("third task","blah","today","low");
+TodoIndexView.render(TodoModel.getTodos());
 
 
 

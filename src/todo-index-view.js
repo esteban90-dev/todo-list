@@ -1,14 +1,15 @@
 const TodoIndexView = (function(){
   const app = document.querySelector("#app");
+  const newButton = _createNewButton();
 
   function render(todos){
+    _clearChildren(app);
     _renderTodos(todos);
-  
-    //display 'new todo' button
-    const createButton = document.createElement('input');
-    createButton.setAttribute("type","button");
-    createButton.setAttribute("value","new todo");
-    app.appendChild(createButton);
+    app.appendChild(newButton);
+  }
+
+  function handleClickNew(handler){
+    newButton.addEventListener('click', handler);
   }
 
   function _renderTodos(todos){
@@ -19,7 +20,21 @@ const TodoIndexView = (function(){
     }
   }
 
-  return { render };
+  function _createNewButton(){
+    const newButton = document.createElement('input');
+    newButton.setAttribute("type","button");
+    newButton.setAttribute("value","new todo");
+    newButton.setAttribute("id","new");
+    return newButton;
+  }
+  
+  function _clearChildren(node){
+    while(node.firstChild){
+      node.removeChild(node.firstChild);
+    }
+  }
+
+  return { render, handleClickNew };
 })();
 
 export default TodoIndexView;

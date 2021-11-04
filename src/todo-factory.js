@@ -9,7 +9,23 @@ function TodoFactory(title, description, dueDate, priority){
     return title;
   }
 
-  return { getTitle };
+  function getDescription(){
+    return description;
+  }
+
+  function getDueDate(){
+    return dueDate;
+  }
+
+  function getPriority(){
+    return priority;
+  }
+
+  function getIsComplete(){
+    return isComplete;
+  }
+
+  return { getTitle, getDescription, getDueDate, getPriority, getIsComplete };
 }
 
 export default TodoFactory;

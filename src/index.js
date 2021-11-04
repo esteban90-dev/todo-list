@@ -1,13 +1,7 @@
-import TodoModel from './todo-model.js';
-import TodoIndexView from './todo-index-view.js';
+import TodoController from './todo-controller';
 
-
-TodoModel.create("first task","blah","today","low");
-TodoModel.create("second task","blah","today","low");
-TodoModel.create("third task","blah","today","low");
-TodoIndexView.render(TodoModel.getTodos());
-
-
+//when the page first loads, render the index of todos
+TodoController.index();
 
 
 

@@ -16,7 +16,17 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo_model_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo-model.js */ \"./src/todo-model.js\");\n/* harmony import */ var _todo_index_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo-index-view.js */ \"./src/todo-index-view.js\");\n\n\n\n\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create(\"first task\",\"blah\",\"today\",\"low\");\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create(\"second task\",\"blah\",\"today\",\"low\");\n_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create(\"third task\",\"blah\",\"today\",\"low\");\n_todo_index_view_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].render(_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getTodos());\n\n\n\n\n\n\n\n\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo_controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo-controller */ \"./src/todo-controller.js\");\n\n\n//when the page first loads, render the index of todos\n_todo_controller__WEBPACK_IMPORTED_MODULE_0__[\"default\"].index();\n\n\n\n\n\n\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/todo-controller.js":
+/*!********************************!*\
+  !*** ./src/todo-controller.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _todo_model_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo-model.js */ \"./src/todo-model.js\");\n/* harmony import */ var _todo_index_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo-index-view.js */ \"./src/todo-index-view.js\");\n\n\n\nconst TodoController = (function(){\n  const todoModel = _todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\n  const todoIndexView = _todo_index_view_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"];\n\n  function index(){\n    todoIndexView.render(todoModel.getTodos());\n  }\n\n  return { index };\n})(_todo_model_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"],_todo_index_view_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TodoController);\n\n//# sourceURL=webpack://todo-list/./src/todo-controller.js?");
 
 /***/ }),
 

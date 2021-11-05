@@ -1,9 +1,9 @@
-const TodoNewView = (function(){
-  const app = document.querySelector("#app");
+const TodoEditView = (function(){
+  const app = document.querySelector('#app');
 
-  function render(todo){
+  function render(todo, id){
     _clearChildren(app);
-    app.appendChild(_createTodoForm());
+    app.appendChild(_createTodoForm(todo, id));
   }
 
   function handleFormSubmit(handler){
@@ -16,8 +16,9 @@ const TodoNewView = (function(){
     }
   }
 
-  function _createTodoForm(){
+  function _createTodoForm(todo, id){
     const form = document.createElement("form");
+    form.setAttribute("id",id);
 
     const titleInputLabel = document.createElement("label");
     titleInputLabel.setAttribute("id","titleInput");
@@ -26,6 +27,7 @@ const TodoNewView = (function(){
     const titleInput = document.createElement("input");
     titleInput.setAttribute("type","text");
     titleInput.setAttribute("name","title");
+    titleInput.setAttribute("value",todo.getTitle());
     titleInput.setAttribute("id","titleInput");
 
     const descriptionInputLabel = document.createElement("label");
@@ -35,6 +37,7 @@ const TodoNewView = (function(){
     const descriptionInput = document.createElement("input");
     descriptionInput.setAttribute("type","text");
     descriptionInput.setAttribute("name","description");
+    descriptionInput.setAttribute("value",todo.getDescription());
     descriptionInput.setAttribute("id","descriptionInput");
 
     const dueDateInputLabel = document.createElement("label");
@@ -44,6 +47,7 @@ const TodoNewView = (function(){
     const dueDateInput = document.createElement("input");
     dueDateInput.setAttribute("type","date");
     dueDateInput.setAttribute("name","dueDate");
+    dueDateInput.setAttribute("value",todo.getDueDate());
     dueDateInput.setAttribute("id","dueDateInput");
 
     const priorityInputLabel = document.createElement("label");
@@ -53,6 +57,7 @@ const TodoNewView = (function(){
     const priorityInput = document.createElement("input");
     priorityInput.setAttribute("type","text");
     priorityInput.setAttribute("name","priority");
+    priorityInput.setAttribute("value",todo.getPriority());
     priorityInput.setAttribute("id","priorityInput");
 
     const submitButton = document.createElement("input");
@@ -75,4 +80,4 @@ const TodoNewView = (function(){
   return { render, handleFormSubmit };
 })();
 
-export default TodoNewView;
+export default TodoEditView;

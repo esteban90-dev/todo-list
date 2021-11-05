@@ -8,17 +8,28 @@ const TodoIndexView = (function(){
   }
 
   function _renderTodos(todos){
+    //display the todos
     for(let i=0; i<todos.length; i++){
+      //todo title
       let p = document.createElement('p');
       p.innerHTML = todos[i].getTitle();
 
-      let a = document.createElement('a');
-      a.setAttribute("id",i);
-      a.setAttribute("href","#");
-      a.innerHTML = "show";
+      //show link
+      let a1 = document.createElement('a');
+      a1.setAttribute("id",i);
+      a1.setAttribute("href","#");
+      a1.innerHTML = "show";
+
+      //edit link
+      let a2 = document.createElement('a');
+      a2.setAttribute("id",i);
+      a2.setAttribute("href","#");
+      a2.innerHTML = "edit";
       
+      //append to app element
       app.appendChild(p);
-      app.appendChild(a);
+      app.appendChild(a1);
+      app.appendChild(a2);
     }
   }
 
@@ -27,8 +38,23 @@ const TodoIndexView = (function(){
   }
 
   function handleClickShow(handler){
-    const showButtons = document.querySelectorAll('a');
-    showButtons.forEach( (button) => { button.addEventListener('click', handler) } );
+    const links = document.querySelectorAll('a');
+
+    links.forEach( (button) => { 
+      if (button.innerHTML === 'show'){
+        button.addEventListener('click', handler) 
+      }
+    });
+  }
+
+  function handleClickEdit(handler){
+    const links = document.querySelectorAll('a');
+
+    links.forEach( (button) => { 
+      if (button.innerHTML === 'edit'){
+        button.addEventListener('click', handler) 
+      }
+    });
   }
 
   function _createNewButton(){
@@ -45,7 +71,7 @@ const TodoIndexView = (function(){
     }
   }
 
-  return { render, handleClickNew, handleClickShow };
+  return { render, handleClickNew, handleClickShow, handleClickEdit };
 })();
 
 export default TodoIndexView;

@@ -10,9 +10,19 @@ const TodoIndexView = (function(){
   function _renderTodos(todos){
     //display the todos
     for(let i=0; i<todos.length; i++){
+      //todo complete checkbox
+      let checkBox = document.createElement("input");
+      checkBox.setAttribute("type","checkbox");
+      checkBox.setAttribute("id",i);
+
       //todo title
       let p = document.createElement('p');
       p.innerHTML = todos[i].getTitle();
+
+      //add a strikethrough if the todo is completed
+      if(todos[i].getIsComplete()){
+        p.classList.add("line-through");
+      }
 
       //show link
       let a1 = document.createElement('a');
@@ -33,11 +43,22 @@ const TodoIndexView = (function(){
       a3.innerHTML = "delete";
       
       //append to app element
+      app.appendChild(checkBox);
       app.appendChild(p);
       app.appendChild(a1);
       app.appendChild(a2);
       app.appendChild(a3);
     }
+  }
+
+  function handleCheck(handler){
+    const checkBoxes = document.querySelectorAll('input');
+
+    checkBoxes.forEach( (box) => { 
+      if (box.getAttribute("type") === 'checkbox'){
+        box.addEventListener('click', handler) 
+      }
+    });
   }
 
   function handleClickNew(handler){
@@ -88,7 +109,7 @@ const TodoIndexView = (function(){
     }
   }
 
-  return { render, handleClickNew, handleClickShow, handleClickEdit, handleClickDelete };
+  return { render, handleClickNew, handleCheck, handleClickShow, handleClickEdit, handleClickDelete };
 })();
 
 export default TodoIndexView;

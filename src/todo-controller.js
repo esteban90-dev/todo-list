@@ -20,6 +20,7 @@ const TodoController = (function(){
 
     //if there are any todos on the index view, bind their 'show', 'edit', and 'delete' button events to the appropriate method
     if (todoModel.getTodos()){
+      todoIndexView.handleCheck(complete);
       todoIndexView.handleClickShow(show);
       todoIndexView.handleClickEdit(edit);
       todoIndexView.handleClickDelete(destroy);
@@ -94,6 +95,16 @@ const TodoController = (function(){
     if(response){
       TodoModel.destroy(id);
     }
+
+    //render the index page
+    index();
+  }
+
+  function complete(event){
+    const id = event.target.getAttribute("id");
+
+    //mark todo complete
+    TodoModel.read(id).setComplete();
 
     //render the index page
     index();

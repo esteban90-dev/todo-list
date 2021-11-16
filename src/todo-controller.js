@@ -102,9 +102,14 @@ const TodoController = (function(){
 
   function complete(event){
     const id = event.target.getAttribute("id");
+    const todo = TodoModel.read(id);
 
-    //mark todo complete
-    TodoModel.read(id).setComplete();
+    //if todo is complete, then mark incomplete.  if todo is incomplete, then mark complete
+    if(todo.getIsComplete()){
+      todo.setIncomplete();
+    } else { 
+      todo.setComplete();
+    }
 
     //render the index page
     index();

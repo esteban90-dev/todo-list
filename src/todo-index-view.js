@@ -15,6 +15,11 @@ const TodoIndexView = (function(){
       checkBox.setAttribute("type","checkbox");
       checkBox.setAttribute("id",i);
 
+      //set the checkbox checked if the todo is completed
+      if(todos[i].getIsComplete()){
+        checkBox.setAttribute("checked",true);
+      }
+
       //todo title
       let p = document.createElement('p');
       p.innerHTML = todos[i].getTitle();

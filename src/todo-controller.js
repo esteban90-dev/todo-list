@@ -18,10 +18,11 @@ const TodoController = (function(){
     //bind new button event to the 'new' method
     todoIndexView.handleClickNew(neW);
 
-    //if there are any todos on the index view, bind their 'show' and 'edit' button events to the 'show' method
+    //if there are any todos on the index view, bind their 'show', 'edit', and 'delete' button events to the appropriate method
     if (todoModel.getTodos()){
       todoIndexView.handleClickShow(show);
       todoIndexView.handleClickEdit(edit);
+      todoIndexView.handleClickDelete(destroy);
     }
   }
 
@@ -78,6 +79,21 @@ const TodoController = (function(){
 
     //update the existing todo
     TodoModel.update(id, title, description, dueDate, priority);
+
+    //render the index page
+    index();
+  }
+
+  function destroy(event){
+    const id = event.target.getAttribute("id");
+
+    //prompt user for confirmation
+    const response = confirm("Are you sure?");
+
+    //remove the given todo from the model if the user confirms removal
+    if(response){
+      TodoModel.destroy(id);
+    }
 
     //render the index page
     index();

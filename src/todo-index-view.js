@@ -25,11 +25,18 @@ const TodoIndexView = (function(){
       a2.setAttribute("id",i);
       a2.setAttribute("href","#");
       a2.innerHTML = "edit";
+
+      //delete link
+      let a3 = document.createElement("a");
+      a3.setAttribute("id",i);
+      a3.setAttribute("href","#");
+      a3.innerHTML = "delete";
       
       //append to app element
       app.appendChild(p);
       app.appendChild(a1);
       app.appendChild(a2);
+      app.appendChild(a3);
     }
   }
 
@@ -57,6 +64,16 @@ const TodoIndexView = (function(){
     });
   }
 
+  function handleClickDelete(handler){
+    const links = document.querySelectorAll('a');
+
+    links.forEach( (button) => { 
+      if (button.innerHTML === 'delete'){
+        button.addEventListener('click', handler) 
+      }
+    });
+  }
+
   function _createNewButton(){
     const newButton = document.createElement('input');
     newButton.setAttribute("type","button");
@@ -71,7 +88,7 @@ const TodoIndexView = (function(){
     }
   }
 
-  return { render, handleClickNew, handleClickShow, handleClickEdit };
+  return { render, handleClickNew, handleClickShow, handleClickEdit, handleClickDelete };
 })();
 
 export default TodoIndexView;

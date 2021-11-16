@@ -62,7 +62,7 @@ const TodoEditView = (function(){
 
     const submitButton = document.createElement("input");
     submitButton.setAttribute("type","submit");
-    submitButton.setAttribute("value","Create Todo");
+    submitButton.setAttribute("value","Update Todo");
 
     form.appendChild(titleInputLabel);
     form.appendChild(titleInput);

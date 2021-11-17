@@ -10,7 +10,15 @@ function ProjectFactory(title, description){
     return description;
   }
 
-  return { getTitle, getDescription }
+  function setTitle(newTitle){
+    title = newTitle;
+  }
+
+  function setDescription(newDescription){
+    description = newDescription;
+  }
+
+  return { getTitle, getDescription, setTitle, setDescription }
 }
 
 export default ProjectFactory;

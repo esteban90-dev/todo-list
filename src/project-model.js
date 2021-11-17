@@ -16,11 +16,17 @@ const ProjectModel = (function(){
     return projects[id];
   }
 
+  function update(projectId, title, description){
+    var project = projects[projectId];
+    project.setTitle(title);
+    project.setDescription(description);
+  }
+
   function getProjects(){
     return projects;
   }
 
-  return { create, read, getProjects }
+  return { create, read, update, getProjects }
 })(ProjectFactory);
 
 export default ProjectModel;

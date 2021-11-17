@@ -3,6 +3,7 @@ import TodoModel from "./todo-model.js";
 import ProjectIndexView from "./project-index-view.js";
 import ProjectNewView from "./project-new-view.js";
 import ProjectShowView from "./project-show-view.js";
+import ProjectEditView from "./project-edit-view.js";
 import TodoController from "./todo-controller.js";
 
 const ProjectController = (function(){
@@ -11,6 +12,7 @@ const ProjectController = (function(){
   const projectIndexView = ProjectIndexView;
   const projectNewView = ProjectNewView;
   const projectShowView = ProjectShowView;
+  const projectEditView = ProjectEditView;
   const todoController = TodoController;
 
   function index(){
@@ -18,11 +20,14 @@ const ProjectController = (function(){
     const projects = projectModel.getProjects();
     projectIndexView.render(projects);
 
+    //bind show buttons to 'show' method
+    projectIndexView.handleClickShow(show);
+
+    //bind edit button to 'edit' method
+    projectIndexView.handleClickEdit(edit);
+
     //bind project new button to 'new' method
     projectIndexView.handleClickNew(neW);
-
-    //bind project title to 'show' method
-    projectIndexView.handleClickShow(show);
   }
 
   function neW(){
@@ -49,6 +54,17 @@ const ProjectController = (function(){
     index();
   }
 
+  function edit(event){
+    const projectId = event.target.getAttribute("data-project-id");
+    const project = projectModel.read(projectId);
+
+    //render edit view
+    projectEditView.render(project, projectId);
+
+    //bind form submission to the update method
+    projectEditView.handleFormSubmit(update);
+  }
+
   function show(event){
     const projectId = event.target.getAttribute("data-project-id");
     const project = projectModel.read(projectId);
@@ -69,7 +85,24 @@ const ProjectController = (function(){
     }
   }
 
+  function update(event){
+    //prevent page refresh after form submission
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+    const newTitle = formData.get("title");
+    const newDescription = formData.get("description");
+    const projectId = form.getAttribute("data-project-id");
+
+    //update project
+    ProjectModel.update(projectId, newTitle, newDescription);
+
+    //render project index
+    index();
+  }
+
   return { index, show };
-})(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView);
+})(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView, ProjectEditView);
 
 export default ProjectController;

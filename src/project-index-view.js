@@ -27,11 +27,18 @@ const ProjectIndexView = (function(){
       a2.setAttribute("href","#");
       a2.innerHTML = "edit";
 
+      //create delete link
+      let a3 = document.createElement("a");
+      a3.setAttribute("data-project-id",i);
+      a3.setAttribute("href","#");
+      a3.innerHTML = "delete";
+
       //append to app element
       app.appendChild(p1);
       app.appendChild(p2);
       app.appendChild(a1);
       app.appendChild(a2);
+      app.appendChild(a3);
     }
 
     //display new project button
@@ -68,13 +75,23 @@ const ProjectIndexView = (function(){
     })
   }
 
+  function handleClickDelete(handler){
+    const links = document.querySelectorAll("a");
+
+    links.forEach( (link) => {
+      if(link.innerHTML === "delete"){
+        link.addEventListener('click',handler);
+      }
+    })
+  }
+
   function _clearChildren(node){
     while(node.firstChild){
       node.removeChild(node.firstChild);
     }
   }
 
-  return { render, handleClickNew, handleClickShow, handleClickEdit };
+  return { render, handleClickNew, handleClickShow, handleClickEdit, handleClickDelete };
 })();
 
 export default ProjectIndexView;

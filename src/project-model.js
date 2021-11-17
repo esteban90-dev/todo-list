@@ -22,11 +22,21 @@ const ProjectModel = (function(){
     project.setDescription(description);
   }
 
+  function destroy(id){
+    var temp = [];
+    for(let i=0; i<projects.length; i++){
+      if (i != id) {
+        temp.push(projects[i]);
+      }
+    }
+    projects = temp;
+  }
+
   function getProjects(){
     return projects;
   }
 
-  return { create, read, update, getProjects }
+  return { create, read, update, destroy, getProjects }
 })(ProjectFactory);
 
 export default ProjectModel;

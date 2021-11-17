@@ -26,6 +26,9 @@ const ProjectController = (function(){
     //bind edit button to 'edit' method
     projectIndexView.handleClickEdit(edit);
 
+    //bind the delete button to 'destroy' method
+    projectIndexView.handleClickDelete(destroy);
+
     //bind project new button to 'new' method
     projectIndexView.handleClickNew(neW);
   }
@@ -101,6 +104,18 @@ const ProjectController = (function(){
     //render project index
     index();
   }
+
+  function destroy(event){
+    const projectId = event.target.getAttribute("data-project-id");
+
+    //prompt user for confirmation before deleting project
+    if(confirm("Are you sure?")){
+      projectModel.destroy(projectId);
+    }
+    
+    //render project index
+    index();
+  } 
 
   return { index, show };
 })(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView, ProjectEditView);

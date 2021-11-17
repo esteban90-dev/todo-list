@@ -1,9 +1,9 @@
 const TodoNewView = (function(){
   const app = document.querySelector("#app");
 
-  function render(todo){
+  function render(projectId){
     _clearChildren(app);
-    app.appendChild(_createTodoForm());
+    app.appendChild(_createTodoForm(projectId));
   }
 
   function handleFormSubmit(handler){
@@ -16,8 +16,9 @@ const TodoNewView = (function(){
     }
   }
 
-  function _createTodoForm(){
+  function _createTodoForm(projectId){
     const form = document.createElement("form");
+    form.setAttribute("data-project-id",projectId);
 
     const titleInputLabel = document.createElement("label");
     titleInputLabel.setAttribute("id","titleInput");

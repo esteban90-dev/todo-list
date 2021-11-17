@@ -1,8 +1,9 @@
-function TodoFactory(title, description, dueDate, priority){
+function TodoFactory(title, description, dueDate, priority, projectId){
   var title = title;
   var description = description;
   var dueDate = dueDate;
   var priority = priority;
+  var projectId = projectId;
   var isComplete = false;
 
   function getTitle(){
@@ -49,7 +50,11 @@ function TodoFactory(title, description, dueDate, priority){
     isComplete = false;
   }
 
-  return { getTitle, setTitle, getDescription, setDescription, getDueDate, setDueDate, getPriority, setPriority, getIsComplete, setComplete, setIncomplete };
+  function getProjectId(){
+    return projectId;
+  }
+
+  return { getTitle, setTitle, getDescription, setDescription, getDueDate, setDueDate, getPriority, setPriority, getIsComplete, setComplete, setIncomplete, getProjectId };
 }
 
 export default TodoFactory;

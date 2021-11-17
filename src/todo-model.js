@@ -4,8 +4,8 @@ const TodoModel = (function(){
   var todos = [];
   var todoFactory = TodoFactory;
 
-  function create(title, description, dueDate, priority){
-    var todo = todoFactory(title, description, dueDate, priority);
+  function create(title, description, dueDate, priority, projectId){
+    var todo = todoFactory(title, description, dueDate, priority, projectId);
     todos.push(todo);
   }
 
@@ -31,8 +31,17 @@ const TodoModel = (function(){
     todos = temp;
   }
 
-  function getTodos(){
-    return todos;
+  function getTodos(projectId){
+    //return todos with given projectId
+    var temp = []
+
+    for(let i=0; i<todos.length; i++){
+      if (todos[i].getProjectId() === projectId){
+        temp.push(todos[i]);
+      }
+    }
+
+    return temp;
   }
 
   return { create, read, update, destroy, getTodos }

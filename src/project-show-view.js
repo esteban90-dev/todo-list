@@ -1,10 +1,25 @@
 const TodoIndexView = (function(){
   const app = document.querySelector("#app");
 
-  function render(todos){
+  function render(project, projectId, todos){
     _clearChildren(app);
+    _renderProject(project);
     _renderTodos(todos);
-    app.appendChild(_createNewButton());
+    app.appendChild(_createNewButton(projectId));
+  }
+
+  function _renderProject(project){
+    //display title
+    const title = document.createElement("h2");
+    title.innerHTML = project.getTitle();
+
+    //display description
+    const description = document.createElement("h3");
+    description.innerHTML = project.getDescription();
+    
+    //append to app element
+    app.appendChild(title);
+    app.appendChild(description);
   }
 
   function _renderTodos(todos){
@@ -100,11 +115,12 @@ const TodoIndexView = (function(){
     });
   }
 
-  function _createNewButton(){
+  function _createNewButton(projectId){
     const newButton = document.createElement('input');
     newButton.setAttribute("type","button");
     newButton.setAttribute("value","new todo");
     newButton.setAttribute("id","new");
+    newButton.setAttribute("data-project-id",projectId)
     return newButton;
   }
   

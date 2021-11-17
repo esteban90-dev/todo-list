@@ -12,11 +12,15 @@ const ProjectModel = (function(){
     projects.push(project);
   }
 
+  function read(id){
+    return projects[id];
+  }
+
   function getProjects(){
     return projects;
   }
 
-  return { create, getProjects }
+  return { create, read, getProjects }
 })(ProjectFactory);
 
 export default ProjectModel;

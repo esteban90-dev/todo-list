@@ -46,12 +46,15 @@ const TodoController = (function(){
 
   function show(event){
     //render the show page for the given todo
-    todoShowView.render(todoModel.read(event.target.getAttribute("id")));
+    const todo = todoModel.read(parseInt(event.target.getAttribute("data-todo-id")));
+
+    todoShowView.render(todo);
   }
 
   function edit(event){
     //render the edit page for the given todo
-    todoEditView.render(TodoModel.read(event.target.getAttribute("id")),event.target.getAttribute("id"));
+    const todo = TodoModel.read(parseInt(event.target.getAttribute("data-todo-id")))
+    todoEditView.render(todo);
 
     //bind form submission on the edit view to the 'update' method
     todoEditView.handleFormSubmit(update);
@@ -67,7 +70,7 @@ const TodoController = (function(){
     const description = formData.get('description');
     const dueDate = formData.get('dueDate');
     const priority = formData.get('priority');
-    const todoId = event.target.getAttribute("id");
+    const todoId = parseInt(event.target.getAttribute("data-todo-id"));
 
     //update the existing todo
     TodoModel.update(todoId, title, description, dueDate, priority);
@@ -79,8 +82,9 @@ const TodoController = (function(){
   }
 
   function destroy(event){
-    const todoId = event.target.getAttribute("id");
+    const todoId = parseInt(event.target.getAttribute("data-todo-id"));
     const todo = todoModel.read(todoId);
+    console.log(todo);
     const projectId = todo.getProjectId();
 
     //prompt user for confirmation
@@ -96,7 +100,7 @@ const TodoController = (function(){
   }
 
   function complete(event){
-    const todoId = event.target.getAttribute("id");
+    const todoId = parseInt(event.target.getAttribute("data-todo-id"));
     const todo = TodoModel.read(todoId);
     const projectId = todo.getProjectId();
 

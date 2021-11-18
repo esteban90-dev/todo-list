@@ -10,7 +10,15 @@ const TodoModel = (function(){
   }
 
   function read(id){
-    return todos[id];
+    var result; 
+
+    for(let i=0; i<todos.length; i++){
+      if(todos[i].getId() === id){
+        result = todos[i];
+      }
+    }
+    
+    return result;
   }
 
   function update(id, title, description, dueDate, priority){
@@ -24,7 +32,7 @@ const TodoModel = (function(){
   function destroy(id){
     var temp = [];
     for(let i=0; i<todos.length; i++){
-      if (i != id) {
+      if (todos[i].getId() != id) {
         temp.push(todos[i]);
       }
     }

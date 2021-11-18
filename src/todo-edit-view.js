@@ -1,9 +1,9 @@
 const TodoEditView = (function(){
   const app = document.querySelector('#app');
 
-  function render(todo, id){
+  function render(todo){
     _clearChildren(app);
-    app.appendChild(_createTodoForm(todo, id));
+    app.appendChild(_createTodoForm(todo));
   }
 
   function handleFormSubmit(handler){
@@ -16,9 +16,9 @@ const TodoEditView = (function(){
     }
   }
 
-  function _createTodoForm(todo, id){
+  function _createTodoForm(todo){
     const form = document.createElement("form");
-    form.setAttribute("id",id);
+    form.setAttribute("data-todo-id",todo.getId());
 
     const titleInputLabel = document.createElement("label");
     titleInputLabel.setAttribute("id","titleInput");

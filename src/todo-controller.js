@@ -4,6 +4,7 @@ import TodoNewView from './todo-new-view.js';
 import TodoShowView from './todo-show-view.js';
 import TodoEditView from './todo-edit-view.js';
 import ProjectShowView from './project-show-view.js';
+import ControllerInterface from './controller-interface.js';
 
 const TodoController = (function(){
   const todoModel = TodoModel;
@@ -12,6 +13,7 @@ const TodoController = (function(){
   const todoShowView = TodoShowView;
   const todoEditView = TodoEditView;
   const projectShowView = ProjectShowView;
+  const controllerInterface = ControllerInterface;
 
   function neW(event){
     const projectId = event.target.getAttribute("data-project-id");
@@ -116,6 +118,9 @@ const TodoController = (function(){
     //render the project show view
     projectShowView.render(project, projectId, todos);
 
+    //bind back button to the project controller's 'index' method
+    projectShowView.handleClickBack(controllerInterface.getProjectIndex());
+
     //bind new button event to the 'new' method
     projectShowView.handleClickNew(neW);
 
@@ -127,6 +132,6 @@ const TodoController = (function(){
   }
 
   return { neW, complete, show, edit, destroy };
-})(TodoModel, ProjectModel, ProjectShowView, TodoNewView, TodoShowView, TodoEditView);
+})(TodoModel, ProjectModel, ProjectShowView, TodoNewView, TodoShowView, TodoEditView, ControllerInterface);
 
 export default TodoController;

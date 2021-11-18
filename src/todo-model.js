@@ -31,6 +31,17 @@ const TodoModel = (function(){
     todos = temp;
   }
 
+  function destroyByProject(projectId){
+    //destroy todos with the given projectId
+    var temp = [];
+    for(let i=0; i<todos.length; i++){
+      if (todos[i].getProjectId() != projectId) {
+        temp.push(todos[i]);
+      }
+    }
+    todos = temp;
+  }
+
   function getTodos(projectId){
     //return todos with given projectId
     var temp = []
@@ -44,7 +55,7 @@ const TodoModel = (function(){
     return temp;
   }
 
-  return { create, read, update, destroy, getTodos }
+  return { create, read, update, destroy, destroyByProject, getTodos }
 })(TodoFactory);
 
 export default TodoModel;

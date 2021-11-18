@@ -4,7 +4,7 @@ import ProjectIndexView from "./project-index-view.js";
 import ProjectNewView from "./project-new-view.js";
 import ProjectShowView from "./project-show-view.js";
 import ProjectEditView from "./project-edit-view.js";
-import TodoController from "./todo-controller.js";
+import ControllerInterface from "./controller-interface.js";
 
 const ProjectController = (function(){
   const projectModel = ProjectModel;
@@ -13,7 +13,7 @@ const ProjectController = (function(){
   const projectNewView = ProjectNewView;
   const projectShowView = ProjectShowView;
   const projectEditView = ProjectEditView;
-  const todoController = TodoController;
+  const controllerInterface = ControllerInterface;
 
   function index(){
     //render the projects
@@ -76,15 +76,18 @@ const ProjectController = (function(){
     //render project
     projectShowView.render(project, projectId, todos);
 
+    //bind back button to the 'index' method
+    projectShowView.handleClickBack(index);
+    
     //bind new button event to the 'new' method in the TodoController
-    projectShowView.handleClickNew(todoController.neW);
+    projectShowView.handleClickNew(controllerInterface.getTodoNew());
 
     //if there are any todos on the show view, bind their 'show', 'edit', and 'delete' button events to the appropriate method in the Todo Controller
     if (todoModel.getTodos()){
-      projectShowView.handleCheck(todoController.complete);
-      projectShowView.handleClickShow(todoController.show);
-      projectShowView.handleClickEdit(todoController.edit);
-      projectShowView.handleClickDelete(todoController.destroy);
+      projectShowView.handleCheck(controllerInterface.getTodoComplete);
+      projectShowView.handleClickShow(controllerInterface.getTodoShow);
+      projectShowView.handleClickEdit(controllerInterface.getTodoEdit);
+      projectShowView.handleClickDelete(controllerInterface.getTodoDestroy);
     }
   }
 
@@ -108,8 +111,14 @@ const ProjectController = (function(){
   function destroy(event){
     const projectId = event.target.getAttribute("data-project-id");
 
-    //prompt user for confirmation before deleting project
-    if(confirm("Are you sure?")){
+    //prompt user for confirmation
+    const response = confirm("Are you sure?");
+  
+    if (response) { 
+      //delete todos associated with project
+      todoModel.destroyByProject(projectId);
+
+      //delete project
       projectModel.destroy(projectId);
     }
     
@@ -118,6 +127,6 @@ const ProjectController = (function(){
   } 
 
   return { index, show };
-})(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView, ProjectEditView);
+})(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView, ProjectEditView, ControllerInterface);
 
 export default ProjectController;

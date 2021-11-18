@@ -3,9 +3,17 @@ const TodoIndexView = (function(){
 
   function render(project, projectId, todos){
     _clearChildren(app);
+    _renderBackLink();
     _renderProject(project);
     _renderTodos(todos);
     app.appendChild(_createNewButton(projectId));
+  }
+
+  function _renderBackLink(){
+    const back = document.createElement("a");
+    back.setAttribute("href","#");
+    back.innerHTML = "back to projects";
+    app.appendChild(back);
   }
 
   function _renderProject(project){
@@ -60,7 +68,7 @@ const TodoIndexView = (function(){
       let a3 = document.createElement("a");
       a3.setAttribute("id",i);
       a3.setAttribute("href","#");
-      a3.innerHTML = "delete";
+      a3.innerHTML = "delete";      
       
       //append to app element
       app.appendChild(checkBox);
@@ -69,6 +77,16 @@ const TodoIndexView = (function(){
       app.appendChild(a2);
       app.appendChild(a3);
     }
+  }
+
+  function handleClickBack(handler){
+    const links = document.querySelectorAll('a');
+
+    links.forEach( (button) => { 
+      if (button.innerHTML === 'back to projects'){
+        button.addEventListener('click', handler) 
+      }
+    });
   }
 
   function handleCheck(handler){
@@ -130,7 +148,7 @@ const TodoIndexView = (function(){
     }
   }
 
-  return { render, handleClickNew, handleCheck, handleClickShow, handleClickEdit, handleClickDelete };
+  return { render, handleClickBack, handleClickNew, handleCheck, handleClickShow, handleClickEdit, handleClickDelete };
 })();
 
 export default TodoIndexView;

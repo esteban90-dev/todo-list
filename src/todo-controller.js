@@ -16,7 +16,7 @@ const TodoController = (function(){
   const controllerInterface = ControllerInterface;
 
   function neW(event){
-    const projectId = event.target.getAttribute("data-project-id");
+    const projectId = parseInt(event.target.getAttribute("data-project-id"));
 
     //render the new todo page
     todoNewView.render(projectId);
@@ -35,7 +35,7 @@ const TodoController = (function(){
     const description = formData.get('description');
     const dueDate = formData.get('dueDate');
     const priority = formData.get('priority');
-    const projectId = event.target.getAttribute("data-project-id");
+    const projectId = parseInt(event.target.getAttribute("data-project-id"));
 
     //create new todo
     TodoModel.create(title, description, dueDate, priority, projectId);

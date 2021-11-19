@@ -47,13 +47,18 @@ const TodoIndexView = (function(){
       }
 
       //todo title
-      let p = document.createElement('p');
-      p.innerHTML = todos[i].getTitle();
+      let p1 = document.createElement('p');
+      p1.innerHTML = todos[i].getTitle();
 
       //add a strikethrough if the todo is completed
       if(todos[i].getIsComplete()){
-        p.classList.add("line-through");
-      }  
+        p1.classList.add("line-through");
+      }
+      
+      //display todo due date
+      let p2 = document.createElement('p');
+      p2.innerHTML = todos[i].getDueDate();
+      p2.classList.add("text-gray-600");
       
       //todo show link
       let a1 = document.createElement('a');
@@ -79,7 +84,8 @@ const TodoIndexView = (function(){
       
       //append to app element
       app.appendChild(checkBox);
-      app.appendChild(p);
+      app.appendChild(p1);
+      app.appendChild(p2);
       app.appendChild(a1);
       app.appendChild(a2);
       app.appendChild(a3);

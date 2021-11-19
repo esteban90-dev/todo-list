@@ -1,12 +1,12 @@
 const TodoIndexView = (function(){
   const app = document.querySelector("#app");
 
-  function render(project, projectId, todos){
+  function render(project, todos){
     _clearChildren(app);
     _renderBackLink();
     _renderProject(project);
     _renderTodos(todos);
-    app.appendChild(_createNewButton(projectId));
+    app.appendChild(_createNewButton(project));
   }
 
   function _renderBackLink(){
@@ -94,7 +94,7 @@ const TodoIndexView = (function(){
 
     checkBoxes.forEach( (box) => { 
       if (box.getAttribute("type") === 'checkbox'){
-        box.addEventListener('click', handler) 
+        box.addEventListener('click', handler); 
       }
     });
   }
@@ -133,12 +133,12 @@ const TodoIndexView = (function(){
     });
   }
 
-  function _createNewButton(projectId){
+  function _createNewButton(project){
     const newButton = document.createElement('input');
     newButton.setAttribute("type","button");
     newButton.setAttribute("value","new todo");
     newButton.setAttribute("id","new");
-    newButton.setAttribute("data-project-id",projectId)
+    newButton.setAttribute("data-project-id",project.getId())
     return newButton;
   }
   

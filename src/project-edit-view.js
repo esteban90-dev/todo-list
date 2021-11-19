@@ -1,12 +1,12 @@
 const ProjectEditView = (function(){
   const app = document.querySelector("#app");
 
-  function render(project, projectId){
+  function render(project){
     //clear out the app area
     _clearChildren(app);
 
     //display the new project form
-    app.appendChild(_createProjectForm(project, projectId));
+    app.appendChild(_createProjectForm(project));
   }
 
   function _clearChildren(node){
@@ -15,7 +15,7 @@ const ProjectEditView = (function(){
     }
   }
 
-  function _createProjectForm(project, projectId){
+  function _createProjectForm(project){
     //create title field
     const titleLabel = document.createElement("label");
     titleLabel.setAttribute("id","titleInput");
@@ -47,7 +47,7 @@ const ProjectEditView = (function(){
     const form = document.createElement("form");
     form.setAttribute("action","");
     form.setAttribute("href","#");
-    form.setAttribute("data-project-id",projectId);
+    form.setAttribute("data-project-id",project.getId());
     
     //append fields and submit button to form
     form.appendChild(titleLabel);

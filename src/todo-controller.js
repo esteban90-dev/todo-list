@@ -120,7 +120,7 @@ const TodoController = (function(){
     const todos = todoModel.getTodos(projectId);
 
     //render the project show view
-    projectShowView.render(project, projectId, todos);
+    projectShowView.render(project, todos);
 
     //bind back button to the project controller's 'index' method
     projectShowView.handleClickBack(controllerInterface.getProjectIndex());
@@ -129,10 +129,12 @@ const TodoController = (function(){
     projectShowView.handleClickNew(neW);
 
     //for each todo on the show view, bind the 'show', 'edit', and 'delete' button events to the appropriate method
-    projectShowView.handleCheck(complete);
-    projectShowView.handleClickShow(show);
-    projectShowView.handleClickEdit(edit);
-    projectShowView.handleClickDelete(destroy);
+    if (todos){
+      projectShowView.handleCheck(complete);
+      projectShowView.handleClickShow(show);
+      projectShowView.handleClickEdit(edit);
+      projectShowView.handleClickDelete(destroy);
+    }
   }
 
   return { neW, complete, show, edit, destroy };

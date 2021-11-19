@@ -13,11 +13,19 @@ const ProjectModel = (function(){
   }
 
   function read(id){
-    return projects[id];
+    var result;
+
+    for(let i=0; i<projects.length; i++){
+      if (projects[i].getId() === id){
+        result = projects[i];
+      }
+    }
+
+    return result;
   }
 
-  function update(projectId, title, description){
-    var project = projects[projectId];
+  function update(id, title, description){
+    var project = read(id);
     project.setTitle(title);
     project.setDescription(description);
   }
@@ -25,7 +33,7 @@ const ProjectModel = (function(){
   function destroy(id){
     var temp = [];
     for(let i=0; i<projects.length; i++){
-      if (i != id) {
+      if (projects[i].getId() != id) {
         temp.push(projects[i]);
       }
     }

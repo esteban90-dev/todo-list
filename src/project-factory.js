@@ -1,6 +1,10 @@
 function ProjectFactory(title, description){
   var title = title;
   var description = description;
+  var id;
+
+  ProjectFactory.numInstances = (ProjectFactory.numInstances || 0) + 1;
+  id ||= ProjectFactory.numInstances;
 
   function getTitle(){
     return title;
@@ -18,7 +22,11 @@ function ProjectFactory(title, description){
     description = newDescription;
   }
 
-  return { getTitle, getDescription, setTitle, setDescription }
+  function getId(){
+    return id;
+  }
+
+  return { getTitle, getDescription, setTitle, setDescription, getId }
 }
 
 export default ProjectFactory;

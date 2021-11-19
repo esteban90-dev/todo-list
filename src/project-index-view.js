@@ -17,19 +17,19 @@ const ProjectIndexView = (function(){
 
       //create show link
       let a1 = document.createElement("a");
-      a1.setAttribute("data-project-id",i);
+      a1.setAttribute("data-project-id",projects[i].getId());
       a1.setAttribute("href","#")
       a1.innerHTML = "show";
 
       //create edit link
       let a2 = document.createElement("a");
-      a2.setAttribute("data-project-id",i);
+      a2.setAttribute("data-project-id",projects[i].getId());
       a2.setAttribute("href","#");
       a2.innerHTML = "edit";
 
       //create delete link
       let a3 = document.createElement("a");
-      a3.setAttribute("data-project-id",i);
+      a3.setAttribute("data-project-id",projects[i].getId());
       a3.setAttribute("href","#");
       a3.innerHTML = "delete";
 

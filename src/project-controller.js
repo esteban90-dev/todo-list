@@ -58,23 +58,23 @@ const ProjectController = (function(){
   }
 
   function edit(event){
-    const projectId = event.target.getAttribute("data-project-id");
+    const projectId = parseInt(event.target.getAttribute("data-project-id"));
     const project = projectModel.read(projectId);
 
     //render edit view
-    projectEditView.render(project, projectId);
+    projectEditView.render(project);
 
     //bind form submission to the update method
     projectEditView.handleFormSubmit(update);
   }
 
   function show(event){
-    const projectId = event.target.getAttribute("data-project-id");
+    const projectId = parseInt(event.target.getAttribute("data-project-id"));
     const project = projectModel.read(projectId);
     const todos = todoModel.getTodos(projectId);
 
     //render project
-    projectShowView.render(project, projectId, todos);
+    projectShowView.render(project, todos);
 
     //bind back button to the 'index' method
     projectShowView.handleClickBack(index);
@@ -82,12 +82,12 @@ const ProjectController = (function(){
     //bind new button event to the 'new' method in the TodoController
     projectShowView.handleClickNew(controllerInterface.getTodoNew());
 
-    //if there are any todos on the show view, bind their 'show', 'edit', and 'delete' button events to the appropriate method in the Todo Controller
-    if (todoModel.getTodos()){
-      projectShowView.handleCheck(controllerInterface.getTodoComplete);
-      projectShowView.handleClickShow(controllerInterface.getTodoShow);
-      projectShowView.handleClickEdit(controllerInterface.getTodoEdit);
-      projectShowView.handleClickDelete(controllerInterface.getTodoDestroy);
+    //if there are any todos on the show view, bind their button events to the appropriate method in the Todo Controller
+    if (todos){
+      projectShowView.handleCheck(controllerInterface.getTodoComplete());
+      projectShowView.handleClickShow(controllerInterface.getTodoShow());
+      projectShowView.handleClickEdit(controllerInterface.getTodoEdit());
+      projectShowView.handleClickDelete(controllerInterface.getTodoDestroy());
     }
   }
 
@@ -99,7 +99,7 @@ const ProjectController = (function(){
     const formData = new FormData(form);
     const newTitle = formData.get("title");
     const newDescription = formData.get("description");
-    const projectId = form.getAttribute("data-project-id");
+    const projectId = parseInt(form.getAttribute("data-project-id"));
 
     //update project
     ProjectModel.update(projectId, newTitle, newDescription);
@@ -109,7 +109,7 @@ const ProjectController = (function(){
   }
 
   function destroy(event){
-    const projectId = event.target.getAttribute("data-project-id");
+    const projectId = parseInt(event.target.getAttribute("data-project-id"));
 
     //prompt user for confirmation
     const response = confirm("Are you sure?");

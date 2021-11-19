@@ -16,23 +16,21 @@ const ProjectController = (function(){
   const controllerInterface = ControllerInterface;
 
   function index(){
-    //render the projects
     const projects = projectModel.getProjects();
+
+    //render index view
     projectIndexView.render(projects);
 
-    //bind show buttons to 'show' method
-    projectIndexView.handleClickShow(show);
-
-    //bind project new button to 'new' method
-    projectIndexView.handleClickNew(neW);
+    //bind buttons to controller methods
+    _bindIndexButtons();
   }
 
   function neW(){
     //render the new view
     projectNewView.render();
 
-    //bind the new view's form submission to the 'create' method
-    projectNewView.handleFormSubmit(create);
+    //bind buttons to controller methods
+    _bindNewForm();
   }
 
   function create(event){
@@ -47,7 +45,7 @@ const ProjectController = (function(){
     //create new project
     projectModel.create(title, description);
 
-    //render the index
+    //render the index view
     index();
   }
 
@@ -58,8 +56,8 @@ const ProjectController = (function(){
     //render edit view
     projectEditView.render(project);
 
-    //bind form submission to the update method
-    projectEditView.handleFormSubmit(update);
+    //bind buttons to controller methods
+    _bindEditForm();
   }
 
   function show(event){
@@ -70,17 +68,8 @@ const ProjectController = (function(){
     //render project
     projectShowView.render(project, todos);
 
-    //bind buttons to appropriate controller methods
-    projectShowView.handleClickBack(index);
-    projectShowView.handleClickEditProject(edit);
-    projectShowView.handleClickDeleteProject(destroy);
-    projectShowView.handleClickNewTodo(controllerInterface.getTodoNew());
-
-    //if there are any todos on the show view, bind their button events to the appropriate method in the Todo Controller
-    if (todos){
-      projectShowView.handleCheckTodo(controllerInterface.getTodoComplete());
-      projectShowView.handleClickShowTodo(controllerInterface.getTodoShow());
-    }
+    //bind buttons to controller methods
+    _bindShowButtons(todos);
   }
 
   function update(event){
@@ -117,6 +106,38 @@ const ProjectController = (function(){
     //render project index
     index();
   } 
+
+  function _bindIndexButtons(){
+    //bind show buttons to 'show' method
+    projectIndexView.handleClickShow(show);
+
+    //bind project new button to 'new' method
+    projectIndexView.handleClickNew(neW);
+  }
+
+  function _bindNewForm(){
+    //bind the new view's form submission to the 'create' method
+    projectNewView.handleFormSubmit(create);
+  }
+
+  function _bindEditForm(){
+    //bind form submission to the update method
+    projectEditView.handleFormSubmit(update);
+  }
+
+  function _bindShowButtons(todos){
+    //bind buttons to appropriate controller methods
+    projectShowView.handleClickBack(index);
+    projectShowView.handleClickEditProject(edit);
+    projectShowView.handleClickDeleteProject(destroy);
+    projectShowView.handleClickNewTodo(controllerInterface.getTodoNew());
+
+    //if there are any todos on the show view, bind their button events to the appropriate method in the Todo Controller
+    if (todos){
+      projectShowView.handleCheckTodo(controllerInterface.getTodoComplete());
+      projectShowView.handleClickShowTodo(controllerInterface.getTodoShow());
+    }
+  }
 
   return { index, show };
 })(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView, ProjectEditView, ControllerInterface);

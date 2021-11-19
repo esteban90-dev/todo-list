@@ -21,8 +21,8 @@ const TodoController = (function(){
     //render the new todo page
     todoNewView.render(projectId);
 
-    //bind form submission on the new view to the 'create' method
-    todoNewView.handleFormSubmit(create);
+    //bind buttons to controller methods 
+    _bindNewForm();
   }
 
   function create(event){
@@ -50,9 +50,8 @@ const TodoController = (function(){
 
     todoShowView.render(todo);
 
-    //bind edit/delete buttons to appropriate controller methods
-    todoShowView.handleClickEditTodo(edit);
-    todoShowView.handleClickDeleteTodo(destroy);
+    //bind buttons to controller methods 
+    _bindShowButtons();
   }
 
   function edit(event){
@@ -60,8 +59,8 @@ const TodoController = (function(){
     const todo = TodoModel.read(parseInt(event.target.getAttribute("data-todo-id")))
     todoEditView.render(todo);
 
-    //bind form submission on the edit view to the 'update' method
-    todoEditView.handleFormSubmit(update);
+    //bind buttons to controller methods 
+    _bindEditButtons();
   }
 
   function update(event){
@@ -116,6 +115,22 @@ const TodoController = (function(){
 
     //render the project show view
     _renderProjectShow(projectId);
+  }
+
+  function _bindNewForm(){
+    //bind form submission on the new view to the 'create' method
+    todoNewView.handleFormSubmit(create);
+  }
+
+  function _bindShowButtons(){
+    //bind edit/delete buttons to appropriate controller methods
+    todoShowView.handleClickEditTodo(edit);
+    todoShowView.handleClickDeleteTodo(destroy);
+  }
+
+  function _bindEditButtons(){
+    //bind form submission on the edit view to the 'update' method
+    todoEditView.handleFormSubmit(update);
   }
 
   function _renderProjectShow(projectId){

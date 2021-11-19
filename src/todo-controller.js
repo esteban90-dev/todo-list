@@ -123,9 +123,7 @@ const TodoController = (function(){
   }
 
   function _bindShowButtons(){
-    //bind edit/delete buttons to appropriate controller methods
-    todoShowView.handleClickEditTodo(edit);
-    todoShowView.handleClickDeleteTodo(destroy);
+
   }
 
   function _bindEditButtons(){
@@ -140,16 +138,15 @@ const TodoController = (function(){
     //render the project show view
     projectShowView.render(project, todos);
 
-    //bind back button to the project controller's 'index' method
+    //bind buttons to appropriate controller methods
     projectShowView.handleClickBack(controllerInterface.getProjectIndex());
-
-    //bind new button event to the 'new' method
     projectShowView.handleClickNewTodo(neW);
 
-    //for each todo on the show view, bind the 'show', 'edit', and 'delete' button events to the appropriate method
     if (todos){
       projectShowView.handleCheckTodo(complete);
       projectShowView.handleClickShowTodo(show);
+      projectShowView.handleClickEditTodo(edit);
+      projectShowView.handleClickDeleteTodo(destroy);
     }
   }
 

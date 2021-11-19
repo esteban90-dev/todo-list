@@ -3,6 +3,7 @@ const TodoEditView = (function(){
 
   function render(todo){
     _clearChildren(app);
+    _renderBackLink(todo.getProjectId())
     app.appendChild(_createTodoForm(todo));
   }
 
@@ -19,6 +20,7 @@ const TodoEditView = (function(){
   function _createTodoForm(todo){
     const form = document.createElement("form");
     form.setAttribute("data-todo-id",todo.getId());
+    form.setAttribute("data-project-id",todo.getProjectId());
 
     const titleInputLabel = document.createElement("label");
     titleInputLabel.setAttribute("id","titleInput");
@@ -77,7 +79,20 @@ const TodoEditView = (function(){
     return form;
   }
 
-  return { render, handleFormSubmit };
+  function _renderBackLink(projectId){
+    const back = document.createElement("a");
+    back.setAttribute("href","#");
+    back.innerHTML = "back to project";
+    back.setAttribute("data-project-id",projectId);
+    back.setAttribute("id","back");
+    app.appendChild(back);
+  }
+
+  function handleClickBack(handler){
+    document.querySelector("#back").addEventListener('click', handler);
+  }
+
+  return { render, handleFormSubmit, handleClickBack };
 })();
 
 export default TodoEditView;

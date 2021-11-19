@@ -5,6 +5,9 @@ const ProjectEditView = (function(){
     //clear out the app area
     _clearChildren(app);
 
+    //display 'back to projects' lnk
+    _renderBackLink();
+
     //display the new project form
     app.appendChild(_createProjectForm(project));
   }
@@ -13,6 +16,14 @@ const ProjectEditView = (function(){
     while(node.firstChild){
       node.removeChild(node.firstChild);
     }
+  }
+
+  function _renderBackLink(){
+    const back = document.createElement("a");
+    back.setAttribute("href","#");
+    back.innerHTML = "back to projects";
+    back.setAttribute("id","back");
+    app.appendChild(back);
   }
 
   function _createProjectForm(project){
@@ -64,7 +75,11 @@ const ProjectEditView = (function(){
     form.addEventListener('submit',handler);
   }
 
-  return { render, handleFormSubmit }
+  function handleClickBack(handler){
+    document.querySelector("#back").addEventListener('click', handler);
+  }
+
+  return { render, handleFormSubmit, handleClickBack }
 })();
 
 export default ProjectEditView;

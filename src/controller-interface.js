@@ -2,6 +2,7 @@
 
 const ControllerInterface = (function(){
   var projectIndex;
+  var projectShow;
   var todoNew;
   var todoComplete;
   var todoShow;
@@ -14,6 +15,14 @@ const ControllerInterface = (function(){
 
   function getProjectIndex(){
     return projectIndex;
+  }
+
+  function setProjectShow(handler){
+    projectShow = handler;
+  }
+
+  function getProjectShow(){
+    return projectShow;
   }
 
   function setTodoNew(handler){
@@ -56,7 +65,7 @@ const ControllerInterface = (function(){
     return todoDestroy;
   }
 
-  return { setProjectIndex, getProjectIndex, setTodoNew, getTodoNew, setTodoComplete, getTodoComplete, setTodoShow, getTodoShow, setTodoEdit, getTodoEdit, setTodoDestroy, getTodoDestroy }
+  return { setProjectIndex, getProjectIndex, setProjectShow, getProjectShow, setTodoNew, getTodoNew, setTodoComplete, getTodoComplete, setTodoShow, getTodoShow, setTodoEdit, getTodoEdit, setTodoDestroy, getTodoDestroy }
 })();
 
 export default ControllerInterface;

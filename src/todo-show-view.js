@@ -3,6 +3,8 @@ const TodoShowView = (function(){
 
   function render(todo){
     _clearChildren(app);
+    _renderBackLink(todo.getProjectId());
+
     const pTitle = document.createElement('p');
     pTitle.innerHTML = "Title: " + todo.getTitle();
 
@@ -31,7 +33,20 @@ const TodoShowView = (function(){
     }
   }
 
-  return { render };
+  function _renderBackLink(projectId){
+    const back = document.createElement("a");
+    back.setAttribute("href","#");
+    back.innerHTML = "back to project";
+    back.setAttribute("data-project-id",projectId);
+    back.setAttribute("id","back");
+    app.appendChild(back);
+  }
+
+  function handleClickBack(handler){
+    document.querySelector("#back").addEventListener('click', handler);
+  }
+
+  return { render, handleClickBack };
 })();
 
 export default TodoShowView

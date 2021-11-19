@@ -39,6 +39,7 @@ const TodoIndexView = (function(){
       checkBox.setAttribute("type","checkbox");
       checkBox.setAttribute("id","complete");
       checkBox.setAttribute("data-todo-id",todos[i].getId());
+      checkBox.setAttribute("data-project-id",todos[i].getProjectId());
 
       //set the checkbox checked if the todo is completed
       if(todos[i].getIsComplete()){
@@ -71,6 +72,7 @@ const TodoIndexView = (function(){
       //todo delete link
       let a3 = document.createElement("a");
       a3.setAttribute("data-todo-id",todos[i].getId());
+      a3.setAttribute("data-project-id",todos[i].getProjectId());
       a3.setAttribute("href","#");
       a3.setAttribute("id","delete");
       a3.innerHTML = "delete";

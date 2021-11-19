@@ -1,18 +1,14 @@
 import TodoModel from './todo-model.js';
-import ProjectModel from './project-model.js';
 import TodoNewView from './todo-new-view.js';
 import TodoShowView from './todo-show-view.js';
 import TodoEditView from './todo-edit-view.js';
-import ProjectShowView from './project-show-view.js';
 import ControllerInterface from './controller-interface.js';
 
 const TodoController = (function(){
   const todoModel = TodoModel;
-  const projectModel = ProjectModel;
   const todoNewView = TodoNewView;
   const todoShowView = TodoShowView;
-  const todoEditView = TodoEditView;
-  const projectShowView = ProjectShowView;
+  const todoEditView = TodoEditView
   const controllerInterface = ControllerInterface;
 
   function neW(event){
@@ -22,7 +18,7 @@ const TodoController = (function(){
     todoNewView.render(projectId);
 
     //bind buttons to controller methods 
-    _bindNewForm();
+    _bindNewButtons();
   }
 
   function create(event){
@@ -41,7 +37,7 @@ const TodoController = (function(){
     TodoModel.create(title, description, dueDate, priority, projectId);
 
     //render the project show view
-    _renderProjectShow(projectId);
+    controllerInterface.getProjectShow()(event);
   }
 
   function show(event){
@@ -51,7 +47,7 @@ const TodoController = (function(){
     todoShowView.render(todo);
 
     //bind buttons to controller methods 
-    _bindShowButtons();
+    _bindShowButtons(todo.getProjectId());
   }
 
   function edit(event){
@@ -79,15 +75,11 @@ const TodoController = (function(){
     TodoModel.update(todoId, title, description, dueDate, priority);
 
     //render the project show view
-    const todo = todoModel.read(todoId);
-    const projectId = todo.getProjectId();
-    _renderProjectShow(projectId);
+    controllerInterface.getProjectShow()(event);
   }
 
   function destroy(event){
     const todoId = parseInt(event.target.getAttribute("data-todo-id"));
-    const todo = todoModel.read(todoId);
-    const projectId = todo.getProjectId();
 
     //prompt user for confirmation
     const response = confirm("Are you sure?");
@@ -98,13 +90,12 @@ const TodoController = (function(){
     }
 
     //render the project show view
-    _renderProjectShow(projectId);
+    controllerInterface.getProjectShow()(event);
   }
 
   function complete(event){
     const todoId = parseInt(event.target.getAttribute("data-todo-id"));
     const todo = TodoModel.read(todoId);
-    const projectId = todo.getProjectId();
 
     //if todo is complete, then mark incomplete.  if todo is incomplete, then mark complete
     if(todo.getIsComplete()){
@@ -114,43 +105,27 @@ const TodoController = (function(){
     }
 
     //render the project show view
-    _renderProjectShow(projectId);
+    controllerInterface.getProjectShow()(event);
   }
 
-  function _bindNewForm(){
-    //bind form submission on the new view to the 'create' method
+  function _bindNewButtons(){
+    //bind buttons to appropriate controller methods
     todoNewView.handleFormSubmit(create);
+    todoNewView.handleClickBack(controllerInterface.getProjectShow());
   }
 
   function _bindShowButtons(){
-
+    //bind buttons to appropriate controller methods
+    todoShowView.handleClickBack(controllerInterface.getProjectShow());
   }
 
   function _bindEditButtons(){
-    //bind form submission on the edit view to the 'update' method
-    todoEditView.handleFormSubmit(update);
-  }
-
-  function _renderProjectShow(projectId){
-    const project = projectModel.read(projectId);
-    const todos = todoModel.getTodos(projectId);
-
-    //render the project show view
-    projectShowView.render(project, todos);
-
     //bind buttons to appropriate controller methods
-    projectShowView.handleClickBack(controllerInterface.getProjectIndex());
-    projectShowView.handleClickNewTodo(neW);
-
-    if (todos){
-      projectShowView.handleCheckTodo(complete);
-      projectShowView.handleClickShowTodo(show);
-      projectShowView.handleClickEditTodo(edit);
-      projectShowView.handleClickDeleteTodo(destroy);
-    }
+    todoEditView.handleFormSubmit(update);
+    todoEditView.handleClickBack(controllerInterface.getProjectShow());
   }
 
   return { neW, complete, show, edit, destroy };
-})(TodoModel, ProjectModel, ProjectShowView, TodoNewView, TodoShowView, TodoEditView, ControllerInterface);
+})(TodoModel, TodoNewView, TodoShowView, TodoEditView, ControllerInterface);
 
 export default TodoController;

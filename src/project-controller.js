@@ -30,7 +30,7 @@ const ProjectController = (function(){
     projectNewView.render();
 
     //bind buttons to controller methods
-    _bindNewForm();
+    _bindNewButtons();
   }
 
   function create(event){
@@ -57,7 +57,7 @@ const ProjectController = (function(){
     projectEditView.render(project);
 
     //bind buttons to controller methods
-    _bindEditForm();
+    _bindEditButtons();
   }
 
   function show(event){
@@ -117,14 +117,16 @@ const ProjectController = (function(){
     projectIndexView.handleClickNew(neW);
   }
 
-  function _bindNewForm(){
-    //bind the new view's form submission to the 'create' method
+  function _bindNewButtons(){
+    //bind buttons to appropriate controller methods
     projectNewView.handleFormSubmit(create);
+    projectNewView.handleClickBack(index);
   }
 
-  function _bindEditForm(){
-    //bind form submission to the update method
+  function _bindEditButtons(){
+    //bind buttons to appropriate controller methods
     projectEditView.handleFormSubmit(update);
+    projectNewView.handleClickBack(index);
   }
 
   function _bindShowButtons(todos){
@@ -133,9 +135,11 @@ const ProjectController = (function(){
     projectShowView.handleClickNewTodo(controllerInterface.getTodoNew());
 
     //if there are any todos on the show view, bind their button events to the appropriate method in the Todo Controller
-    if (todos){
+    if (todos.length > 0){
       projectShowView.handleCheckTodo(controllerInterface.getTodoComplete());
       projectShowView.handleClickShowTodo(controllerInterface.getTodoShow());
+      projectShowView.handleClickEditTodo(controllerInterface.getTodoEdit());
+      projectShowView.handleClickDeleteTodo(controllerInterface.getTodoDestroy());
     }
   }
 

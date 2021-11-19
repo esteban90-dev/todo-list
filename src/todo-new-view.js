@@ -3,6 +3,7 @@ const TodoNewView = (function(){
 
   function render(projectId){
     _clearChildren(app);
+    _renderBackLink(projectId);
     app.appendChild(_createTodoForm(projectId));
   }
 
@@ -73,7 +74,20 @@ const TodoNewView = (function(){
     return form;
   }
 
-  return { render, handleFormSubmit };
+  function _renderBackLink(projectId){
+    const back = document.createElement("a");
+    back.setAttribute("href","#");
+    back.innerHTML = "back to project";
+    back.setAttribute("data-project-id",projectId);
+    back.setAttribute("id","back");
+    app.appendChild(back);
+  }
+
+  function handleClickBack(handler){
+    document.querySelector("#back").addEventListener('click', handler);
+  }
+
+  return { render, handleFormSubmit, handleClickBack };
 })();
 
 export default TodoNewView;

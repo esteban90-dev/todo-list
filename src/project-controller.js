@@ -23,12 +23,6 @@ const ProjectController = (function(){
     //bind show buttons to 'show' method
     projectIndexView.handleClickShow(show);
 
-    //bind edit button to 'edit' method
-    projectIndexView.handleClickEdit(edit);
-
-    //bind the delete button to 'destroy' method
-    projectIndexView.handleClickDelete(destroy);
-
     //bind project new button to 'new' method
     projectIndexView.handleClickNew(neW);
   }
@@ -76,18 +70,16 @@ const ProjectController = (function(){
     //render project
     projectShowView.render(project, todos);
 
-    //bind back button to the 'index' method
+    //bind buttons to appropriate controller methods
     projectShowView.handleClickBack(index);
-    
-    //bind new button event to the 'new' method in the TodoController
-    projectShowView.handleClickNew(controllerInterface.getTodoNew());
+    projectShowView.handleClickEditProject(edit);
+    projectShowView.handleClickDeleteProject(destroy);
+    projectShowView.handleClickNewTodo(controllerInterface.getTodoNew());
 
     //if there are any todos on the show view, bind their button events to the appropriate method in the Todo Controller
     if (todos){
-      projectShowView.handleCheck(controllerInterface.getTodoComplete());
-      projectShowView.handleClickShow(controllerInterface.getTodoShow());
-      projectShowView.handleClickEdit(controllerInterface.getTodoEdit());
-      projectShowView.handleClickDelete(controllerInterface.getTodoDestroy());
+      projectShowView.handleCheckTodo(controllerInterface.getTodoComplete());
+      projectShowView.handleClickShowTodo(controllerInterface.getTodoShow());
     }
   }
 

@@ -18,17 +18,33 @@ const TodoIndexView = (function(){
   }
 
   function _renderProject(project){
-    //display title
+    //display project title
     const title = document.createElement("h2");
     title.innerHTML = project.getTitle();
 
-    //display description
+    //display project description
     const description = document.createElement("h3");
     description.innerHTML = project.getDescription();
+
+    //create project edit link
+    let a1 = document.createElement("a");
+    a1.setAttribute("data-project-id",project.getId());
+    a1.setAttribute("href","#");
+    a1.setAttribute("id","edit");
+    a1.innerHTML = "edit";
+
+    //create project delete link
+    let a2 = document.createElement("a");
+    a2.setAttribute("data-project-id",project.getId());
+    a2.setAttribute("href","#");
+    a2.setAttribute("id","delete");
+    a2.innerHTML = "delete";
     
     //append to app element
     app.appendChild(title);
     app.appendChild(description);
+    app.appendChild(a1);
+    app.appendChild(a2);
   }
 
   function _renderTodos(todos){
@@ -56,27 +72,11 @@ const TodoIndexView = (function(){
       //add a strikethrough if the todo is completed
       if(todos[i].getIsComplete()){
         a1.classList.add("line-through");
-      }
-
-      //edit link
-      let a2 = document.createElement('a');
-      a2.setAttribute("data-todo-id",todos[i].getId());
-      a2.setAttribute("href","#");
-      a2.setAttribute("id","edit");
-      a2.innerHTML = "edit";
-
-      //delete link
-      let a3 = document.createElement("a");
-      a3.setAttribute("data-todo-id",todos[i].getId());
-      a3.setAttribute("href","#");
-      a3.setAttribute("id","delete");
-      a3.innerHTML = "delete";      
+      }     
       
-      //append to app element
+      //todo append to app element
       app.appendChild(checkBox);
       app.appendChild(a1);
-      app.appendChild(a2);
-      app.appendChild(a3);
     }
   }
 
@@ -84,7 +84,23 @@ const TodoIndexView = (function(){
     document.querySelector("#back").addEventListener('click', handler);
   }
 
-  function handleCheck(handler){
+  function handleClickEditProject(handler){
+    const editLinks = document.querySelectorAll("#edit");
+
+    editLinks.forEach( (link) => {
+      link.addEventListener('click',handler);
+    })
+  }
+
+  function handleClickDeleteProject(handler){
+    const deleteLinks = document.querySelectorAll("#delete");
+
+    deleteLinks.forEach( (link) => {
+      link.addEventListener('click',handler);
+    })
+  }
+
+  function handleCheckTodo(handler){
     const checkBoxes = document.querySelectorAll("#complete");
 
     checkBoxes.forEach( (box) => { 
@@ -92,31 +108,15 @@ const TodoIndexView = (function(){
     });
   }
 
-  function handleClickNew(handler){
+  function handleClickNewTodo(handler){
     document.querySelector("#new").addEventListener('click', handler);
   }
 
-  function handleClickShow(handler){
+  function handleClickShowTodo(handler){
     const showLinks = document.querySelectorAll("#show");
 
     showLinks.forEach( (button) => { 
       button.addEventListener('click', handler);
-    });
-  }
-
-  function handleClickEdit(handler){
-    const editLinks = document.querySelectorAll("#edit");
-
-    editLinks.forEach( (button) => { 
-      button.addEventListener('click', handler) 
-    });
-  }
-
-  function handleClickDelete(handler){
-    const deleteLinks = document.querySelectorAll("#delete");
-
-    deleteLinks.forEach( (button) => { 
-      button.addEventListener('click', handler) 
     });
   }
 
@@ -135,7 +135,7 @@ const TodoIndexView = (function(){
     }
   }
 
-  return { render, handleClickBack, handleClickNew, handleCheck, handleClickShow, handleClickEdit, handleClickDelete };
+  return { render, handleClickBack, handleClickEditProject, handleClickDeleteProject, handleClickNewTodo, handleCheckTodo, handleClickShowTodo };
 })();
 
 export default TodoIndexView;

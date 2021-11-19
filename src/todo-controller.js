@@ -49,6 +49,10 @@ const TodoController = (function(){
     const todo = todoModel.read(parseInt(event.target.getAttribute("data-todo-id")));
 
     todoShowView.render(todo);
+
+    //bind edit/delete buttons to appropriate controller methods
+    todoShowView.handleClickEditTodo(edit);
+    todoShowView.handleClickDeleteTodo(destroy);
   }
 
   function edit(event){
@@ -125,14 +129,12 @@ const TodoController = (function(){
     projectShowView.handleClickBack(controllerInterface.getProjectIndex());
 
     //bind new button event to the 'new' method
-    projectShowView.handleClickNew(neW);
+    projectShowView.handleClickNewTodo(neW);
 
     //for each todo on the show view, bind the 'show', 'edit', and 'delete' button events to the appropriate method
     if (todos){
-      projectShowView.handleCheck(complete);
-      projectShowView.handleClickShow(show);
-      projectShowView.handleClickEdit(edit);
-      projectShowView.handleClickDelete(destroy);
+      projectShowView.handleCheckTodo(complete);
+      projectShowView.handleClickShowTodo(show);
     }
   }
 

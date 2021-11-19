@@ -8,19 +8,15 @@ const ProjectIndexView = (function(){
     //display projects
     for(let i=0; i<projects.length; i++){
       //create title element
-      let p1 = document.createElement("p");
-      p1.innerHTML = projects[i].getTitle();
-
-      //create description element
-      let p2 = document.createElement("p");
-      p2.innerHTML = projects[i].getDescription();
-
-      //create show link
       let a1 = document.createElement("a");
       a1.setAttribute("data-project-id",projects[i].getId());
       a1.setAttribute("href","#")
+      a1.innerHTML = projects[i].getTitle();
       a1.setAttribute("id","show");
-      a1.innerHTML = "show";
+
+      //create description element
+      let p = document.createElement("p");
+      p.innerHTML = projects[i].getDescription();
 
       //create edit link
       let a2 = document.createElement("a");
@@ -37,9 +33,8 @@ const ProjectIndexView = (function(){
       a3.innerHTML = "delete";
 
       //append to app element
-      app.appendChild(p1);
-      app.appendChild(p2);
       app.appendChild(a1);
+      app.appendChild(p);
       app.appendChild(a2);
       app.appendChild(a3);
     }

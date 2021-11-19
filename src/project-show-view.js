@@ -13,6 +13,7 @@ const TodoIndexView = (function(){
     const back = document.createElement("a");
     back.setAttribute("href","#");
     back.innerHTML = "back to projects";
+    back.setAttribute("id","back");
     app.appendChild(back);
   }
 
@@ -36,6 +37,7 @@ const TodoIndexView = (function(){
       //todo complete checkbox
       let checkBox = document.createElement("input");
       checkBox.setAttribute("type","checkbox");
+      checkBox.setAttribute("id","complete");
       checkBox.setAttribute("data-todo-id",todos[i].getId());
 
       //set the checkbox checked if the todo is completed
@@ -56,18 +58,21 @@ const TodoIndexView = (function(){
       let a1 = document.createElement('a');
       a1.setAttribute("data-todo-id",todos[i].getId());
       a1.setAttribute("href","#");
+      a1.setAttribute("id","show");
       a1.innerHTML = "show";
 
       //edit link
       let a2 = document.createElement('a');
       a2.setAttribute("data-todo-id",todos[i].getId());
       a2.setAttribute("href","#");
+      a2.setAttribute("id","edit");
       a2.innerHTML = "edit";
 
       //delete link
       let a3 = document.createElement("a");
       a3.setAttribute("data-todo-id",todos[i].getId());
       a3.setAttribute("href","#");
+      a3.setAttribute("id","delete");
       a3.innerHTML = "delete";      
       
       //append to app element
@@ -80,22 +85,14 @@ const TodoIndexView = (function(){
   }
 
   function handleClickBack(handler){
-    const links = document.querySelectorAll('a');
-
-    links.forEach( (button) => { 
-      if (button.innerHTML === 'back to projects'){
-        button.addEventListener('click', handler) 
-      }
-    });
+    document.querySelector("#back").addEventListener('click', handler);
   }
 
   function handleCheck(handler){
-    const checkBoxes = document.querySelectorAll('input');
+    const checkBoxes = document.querySelectorAll("#complete");
 
     checkBoxes.forEach( (box) => { 
-      if (box.getAttribute("type") === 'checkbox'){
-        box.addEventListener('click', handler); 
-      }
+      box.addEventListener('click', handler); 
     });
   }
 
@@ -104,32 +101,26 @@ const TodoIndexView = (function(){
   }
 
   function handleClickShow(handler){
-    const links = document.querySelectorAll('a');
+    const showLinks = document.querySelectorAll("#show");
 
-    links.forEach( (button) => { 
-      if (button.innerHTML === 'show'){
-        button.addEventListener('click', handler) 
-      }
+    showLinks.forEach( (button) => { 
+      button.addEventListener('click', handler);
     });
   }
 
   function handleClickEdit(handler){
-    const links = document.querySelectorAll('a');
+    const editLinks = document.querySelectorAll("#edit");
 
-    links.forEach( (button) => { 
-      if (button.innerHTML === 'edit'){
-        button.addEventListener('click', handler) 
-      }
+    editLinks.forEach( (button) => { 
+      button.addEventListener('click', handler) 
     });
   }
 
   function handleClickDelete(handler){
-    const links = document.querySelectorAll('a');
+    const deleteLinks = document.querySelectorAll("#delete");
 
-    links.forEach( (button) => { 
-      if (button.innerHTML === 'delete'){
-        button.addEventListener('click', handler) 
-      }
+    deleteLinks.forEach( (button) => { 
+      button.addEventListener('click', handler) 
     });
   }
 

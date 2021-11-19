@@ -84,7 +84,6 @@ const TodoController = (function(){
   function destroy(event){
     const todoId = parseInt(event.target.getAttribute("data-todo-id"));
     const todo = todoModel.read(todoId);
-    console.log(todo);
     const projectId = todo.getProjectId();
 
     //prompt user for confirmation

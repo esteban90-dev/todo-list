@@ -57,8 +57,7 @@ const ProjectNewView = (function(){
   }
 
   function handleFormSubmit(handler){
-    const form = document.querySelector("form");
-    form.addEventListener('submit',handler);
+    document.querySelector("form").addEventListener('submit',handler);
   }
 
   return { render, handleFormSubmit };

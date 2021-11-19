@@ -19,18 +19,21 @@ const ProjectIndexView = (function(){
       let a1 = document.createElement("a");
       a1.setAttribute("data-project-id",projects[i].getId());
       a1.setAttribute("href","#")
+      a1.setAttribute("id","show");
       a1.innerHTML = "show";
 
       //create edit link
       let a2 = document.createElement("a");
       a2.setAttribute("data-project-id",projects[i].getId());
       a2.setAttribute("href","#");
+      a2.setAttribute("id","edit");
       a2.innerHTML = "edit";
 
       //create delete link
       let a3 = document.createElement("a");
       a3.setAttribute("data-project-id",projects[i].getId());
       a3.setAttribute("href","#");
+      a3.setAttribute("id","delete");
       a3.innerHTML = "delete";
 
       //append to app element
@@ -51,37 +54,30 @@ const ProjectIndexView = (function(){
   }
 
   function handleClickNew(handler){
-    const newButton = document.querySelector("#new");
-    newButton.addEventListener('click',handler);
+    document.querySelector("#new").addEventListener('click',handler);
   }
 
   function handleClickShow(handler){
-    const links = document.querySelectorAll("a");
+    const showLinks = document.querySelectorAll("#show");
 
-    links.forEach( (link) => {
-      if(link.innerHTML === "show"){
-        link.addEventListener('click',handler);
-      }
+    showLinks.forEach( (link) => {
+      link.addEventListener('click',handler);
     })
   }
 
   function handleClickEdit(handler){
-    const links = document.querySelectorAll("a");
+    const editLinks = document.querySelectorAll("#edit");
 
-    links.forEach( (link) => {
-      if(link.innerHTML === "edit"){
-        link.addEventListener('click',handler);
-      }
+    editLinks.forEach( (link) => {
+      link.addEventListener('click',handler);
     })
   }
 
   function handleClickDelete(handler){
-    const links = document.querySelectorAll("a");
+    const deleteLinks = document.querySelectorAll("#delete");
 
-    links.forEach( (link) => {
-      if(link.innerHTML === "delete"){
-        link.addEventListener('click',handler);
-      }
+    deleteLinks.forEach( (link) => {
+      link.addEventListener('click',handler);
     })
   }
 

@@ -48,14 +48,29 @@ const TodoNewView = (function(){
     dueDateInput.setAttribute("name","dueDate");
     dueDateInput.setAttribute("id","dueDateInput");
 
-    const priorityInputLabel = document.createElement("label");
-    priorityInputLabel.setAttribute("id","priorityInput");
-    priorityInputLabel.innerHTML = "Priority:";
+    const prioritySelectLabel = document.createElement("label");
+    prioritySelectLabel.setAttribute("id","prioritySelect");
+    prioritySelectLabel.innerHTML = "Priority:";
 
-    const priorityInput = document.createElement("input");
-    priorityInput.setAttribute("type","text");
-    priorityInput.setAttribute("name","priority");
-    priorityInput.setAttribute("id","priorityInput");
+    const prioritySelect = document.createElement("select");
+    prioritySelect.setAttribute("name","priority");
+    prioritySelect.setAttribute("id","prioritySelect");
+
+    const option1 = document.createElement("option");
+    option1.setAttribute("value","low");
+    option1.innerHTML = "low";
+
+    const option2 = document.createElement("option");
+    option2.setAttribute("value","medium");
+    option2.innerHTML = "medium";
+
+    const option3 = document.createElement("option");
+    option3.setAttribute("value","high");
+    option3.innerHTML = "high";
+
+    prioritySelect.appendChild(option1);
+    prioritySelect.appendChild(option2);
+    prioritySelect.appendChild(option3);
 
     const submitButton = document.createElement("input");
     submitButton.setAttribute("type","submit");
@@ -67,8 +82,8 @@ const TodoNewView = (function(){
     form.appendChild(descriptionInput);
     form.appendChild(dueDateInputLabel);
     form.appendChild(dueDateInput);
-    form.appendChild(priorityInputLabel);
-    form.appendChild(priorityInput);
+    form.appendChild(prioritySelectLabel);
+    form.appendChild(prioritySelect);
     form.appendChild(submitButton);
 
     return form;

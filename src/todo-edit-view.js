@@ -52,15 +52,38 @@ const TodoEditView = (function(){
     dueDateInput.setAttribute("value",todo.getDueDate());
     dueDateInput.setAttribute("id","dueDateInput");
 
-    const priorityInputLabel = document.createElement("label");
-    priorityInputLabel.setAttribute("id","priorityInput");
-    priorityInputLabel.innerHTML = "Priority:";
+    const prioritySelectLabel = document.createElement("label");
+    prioritySelectLabel.setAttribute("id","prioritySelect");
+    prioritySelectLabel.innerHTML = "Priority:";
 
-    const priorityInput = document.createElement("input");
-    priorityInput.setAttribute("type","text");
-    priorityInput.setAttribute("name","priority");
-    priorityInput.setAttribute("value",todo.getPriority());
-    priorityInput.setAttribute("id","priorityInput");
+    const prioritySelect = document.createElement("select");
+    prioritySelect.setAttribute("name","priority");
+    prioritySelect.setAttribute("id","prioritySelect");
+
+    const option1 = document.createElement("option");
+    option1.setAttribute("value","low");
+    if(todo.getPriority() === 'low'){
+      option1.setAttribute("selected",true);
+    }
+    option1.innerHTML = "low";
+
+    const option2 = document.createElement("option");
+    option2.setAttribute("value","medium");
+    if(todo.getPriority() === 'medium'){
+      option2.setAttribute("selected",true);
+    }
+    option2.innerHTML = "medium";
+
+    const option3 = document.createElement("option");
+    option3.setAttribute("value","high");
+    if(todo.getPriority() === 'high'){
+      option3.setAttribute("selected",true);
+    }
+    option3.innerHTML = "high";
+
+    prioritySelect.appendChild(option1);
+    prioritySelect.appendChild(option2);
+    prioritySelect.appendChild(option3);
 
     const submitButton = document.createElement("input");
     submitButton.setAttribute("type","submit");
@@ -72,8 +95,8 @@ const TodoEditView = (function(){
     form.appendChild(descriptionInput);
     form.appendChild(dueDateInputLabel);
     form.appendChild(dueDateInput);
-    form.appendChild(priorityInputLabel);
-    form.appendChild(priorityInput);
+    form.appendChild(prioritySelectLabel);
+    form.appendChild(prioritySelect);
     form.appendChild(submitButton);
 
     return form;

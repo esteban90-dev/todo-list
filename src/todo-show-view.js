@@ -12,7 +12,12 @@ const TodoShowView = (function(){
     pDescription.innerHTML = "Description: " + todo.getDescription();
 
     const pDueDate = document.createElement('p');
-    pDueDate.innerHTML = "Due Date: " + todo.getDueDate();
+
+    if(todo.getDueDate()){
+      pDueDate.innerHTML = "Due Date: " + todo.getDueDate();
+    } else {
+      pDueDate.innerHTML = "Due Date: n/a";
+    }
 
     const pPriority = document.createElement('p');
     pPriority.innerHTML = "Priority: " + todo.getPriority();

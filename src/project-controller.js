@@ -15,6 +15,12 @@ const ProjectController = (function(){
   const projectEditView = ProjectEditView;
   const controllerInterface = ControllerInterface;
 
+  function initialize(){
+    //bind controller methods to controller interface
+    controllerInterface.setProjectIndex(index);
+    controllerInterface.setProjectShow(show);
+  }
+
   function index(){
     const projects = projectModel.getProjects();
 
@@ -143,7 +149,7 @@ const ProjectController = (function(){
     }
   }
 
-  return { index, show };
+  return { initialize, index, show };
 })(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView, ProjectEditView, ControllerInterface);
 
 export default ProjectController;

@@ -11,6 +11,15 @@ const TodoController = (function(){
   const todoEditView = TodoEditView
   const controllerInterface = ControllerInterface;
 
+  function initialize(){
+    //bind controller methods to controller interface
+    controllerInterface.setTodoNew(neW);
+    controllerInterface.setTodoComplete(complete);
+    controllerInterface.setTodoShow(show);
+    controllerInterface.setTodoEdit(edit);
+    controllerInterface.setTodoDestroy(destroy);
+  }
+
   function neW(event){
     const projectId = parseInt(event.target.getAttribute("data-project-id"));
 
@@ -125,7 +134,7 @@ const TodoController = (function(){
     todoEditView.handleClickBack(controllerInterface.getProjectShow());
   }
 
-  return { neW, complete, show, edit, destroy };
+  return { initialize, neW, complete, show, edit, destroy };
 })(TodoModel, TodoNewView, TodoShowView, TodoEditView, ControllerInterface);
 
 export default TodoController;

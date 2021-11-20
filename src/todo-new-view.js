@@ -1,20 +1,17 @@
+import clearChildren from "./clear-children.js";
+
 const TodoNewView = (function(){
   const app = document.querySelector("#app");
+  const clear = clearChildren;
 
   function render(projectId){
-    _clearChildren(app);
+    clear(app);
     _renderBackLink(projectId);
     app.appendChild(_createTodoForm(projectId));
   }
 
   function handleFormSubmit(handler){
     document.querySelector('form').addEventListener('submit',handler);
-  }
-
-  function _clearChildren(node){
-    while(node.firstChild){
-      node.removeChild(node.firstChild);
-    }
   }
 
   function _createTodoForm(projectId){
@@ -105,6 +102,6 @@ const TodoNewView = (function(){
   }
 
   return { render, handleFormSubmit, handleClickBack };
-})();
+})(clearChildren);
 
 export default TodoNewView;

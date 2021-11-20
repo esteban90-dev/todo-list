@@ -1,8 +1,11 @@
+import clearChildren from "./clear-children.js";
+
 const TodoShowView = (function(){
   const app = document.querySelector("#app");
+  const clear = clearChildren;
 
   function render(todo){
-    _clearChildren(app);
+    clear(app);
     _renderBackLink(todo.getProjectId());
 
     const pTitle = document.createElement('p');
@@ -38,12 +41,6 @@ const TodoShowView = (function(){
     app.appendChild(pIsComplete);
   }
 
-  function _clearChildren(node){
-    while(node.firstChild){
-      node.removeChild(node.firstChild);
-    }
-  }
-
   function _renderBackLink(projectId){
     const back = document.createElement("a");
     back.setAttribute("href","#");
@@ -58,6 +55,6 @@ const TodoShowView = (function(){
   }
 
   return { render, handleClickBack };
-})();
+})(clearChildren);
 
 export default TodoShowView

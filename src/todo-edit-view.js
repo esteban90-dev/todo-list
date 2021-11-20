@@ -1,20 +1,17 @@
+import clearChildren from "./clear-children.js";
+
 const TodoEditView = (function(){
   const app = document.querySelector('#app');
+  const clear = clearChildren;
 
   function render(todo){
-    _clearChildren(app);
+    clear(app);
     _renderBackLink(todo.getProjectId())
     app.appendChild(_createTodoForm(todo));
   }
 
   function handleFormSubmit(handler){
     document.querySelector('form').addEventListener('submit',handler);
-  }
-
-  function _clearChildren(node){
-    while(node.firstChild){
-      node.removeChild(node.firstChild);
-    }
   }
 
   function _createTodoForm(todo){
@@ -118,6 +115,6 @@ const TodoEditView = (function(){
   }
 
   return { render, handleFormSubmit, handleClickBack };
-})();
+})(clearChildren);
 
 export default TodoEditView;

@@ -1,9 +1,12 @@
+import clearChildren from "./clear-children.js";
+
 const ProjectIndexView = (function(){
   const app = document.querySelector("#app");
+  const clear = clearChildren;
 
   function render(projects){
     //clear app element
-    _clearChildren(app); 
+    clear(app); 
 
     //display projects
     for(let i=0; i<projects.length; i++){
@@ -76,14 +79,8 @@ const ProjectIndexView = (function(){
     })
   }
 
-  function _clearChildren(node){
-    while(node.firstChild){
-      node.removeChild(node.firstChild);
-    }
-  }
-
   return { render, handleClickNew, handleClickEditProject, handleClickDeleteProject, handleClickShow };
-})();
+})(clearChildren);
 
 export default ProjectIndexView;
 

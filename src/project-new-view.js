@@ -1,21 +1,18 @@
+import clearChildren from "./clear-children.js";
+
 const ProjectNewView = (function(){
   const app = document.querySelector("#app");
+  const clear = clearChildren;
 
   function render(){
     //clear out the app area
-    _clearChildren(app);
+    clear(app);
 
     //display 'back to projects' lnk
     _renderBackLink();
 
     //display the new project form
     app.appendChild(_createProjectForm());
-  }
-
-  function _clearChildren(node){
-    while(node.firstChild){
-      node.removeChild(node.firstChild);
-    }
   }
 
   function _renderBackLink(){
@@ -78,6 +75,6 @@ const ProjectNewView = (function(){
   }
 
   return { render, handleFormSubmit, handleClickBack };
-})();
+})(clearChildren);
 
 export default ProjectNewView;

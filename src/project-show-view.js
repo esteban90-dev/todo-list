@@ -1,8 +1,11 @@
+import clearChildren from "./clear-children.js";
+
 const TodoIndexView = (function(){
   const app = document.querySelector("#app");
+  const clear = clearChildren;
 
   function render(project, todos){
-    _clearChildren(app);
+    clear(app);
     _renderBackLink();
     _renderProject(project);
     _renderTodos(todos);
@@ -140,14 +143,8 @@ const TodoIndexView = (function(){
     newButton.setAttribute("data-project-id",project.getId())
     return newButton;
   }
-  
-  function _clearChildren(node){
-    while(node.firstChild){
-      node.removeChild(node.firstChild);
-    }
-  }
 
   return { render, handleClickBack, handleClickEditTodo, handleClickDeleteTodo, handleClickNewTodo, handleCheckTodo, handleClickShowTodo };
-})();
+})(clearChildren);
 
 export default TodoIndexView;

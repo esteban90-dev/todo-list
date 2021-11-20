@@ -23,7 +23,13 @@ const TodoShowView = (function(){
     pPriority.innerHTML = "Priority: " + todo.getPriority();
 
     const pIsComplete = document.createElement('p');
-    pIsComplete.innerHTML = "Completed: " + todo.getIsComplete();
+
+    if(todo.getIsComplete()){
+      pIsComplete.innerHTML = "Completed: yes";
+    } else {
+      pIsComplete.innerHTML = "Completed: no";
+    }
+    
 
     app.appendChild(pTitle);
     app.appendChild(pDescription);

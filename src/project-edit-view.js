@@ -29,7 +29,7 @@ const ProjectEditView = (function(){
   function _createProjectForm(project){
     //create title field
     const titleLabel = document.createElement("label");
-    titleLabel.setAttribute("id","titleInput");
+    titleLabel.setAttribute("for","titleInput");
     titleLabel.innerHTML = "Title:";
 
     const titleInput = document.createElement("input");
@@ -40,7 +40,7 @@ const ProjectEditView = (function(){
 
     //create description field
     const descLabel = document.createElement("label");
-    descLabel.setAttribute("id","descInput");
+    descLabel.setAttribute("for","descInput");
     descLabel.innerHTML = "Description:";
 
     const descInput = document.createElement("input");

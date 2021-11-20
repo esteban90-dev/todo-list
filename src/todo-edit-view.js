@@ -23,7 +23,7 @@ const TodoEditView = (function(){
     form.setAttribute("data-project-id",todo.getProjectId());
 
     const titleInputLabel = document.createElement("label");
-    titleInputLabel.setAttribute("id","titleInput");
+    titleInputLabel.setAttribute("for","titleInput");
     titleInputLabel.innerHTML = "Title:";
 
     const titleInput = document.createElement("input");
@@ -33,7 +33,7 @@ const TodoEditView = (function(){
     titleInput.setAttribute("id","titleInput");
 
     const descriptionInputLabel = document.createElement("label");
-    descriptionInputLabel.setAttribute("id","descriptionInput");
+    descriptionInputLabel.setAttribute("for","descriptionInput");
     descriptionInputLabel.innerHTML = "Description:";
 
     const descriptionInput = document.createElement("input");
@@ -43,7 +43,7 @@ const TodoEditView = (function(){
     descriptionInput.setAttribute("id","descriptionInput");
 
     const dueDateInputLabel = document.createElement("label");
-    dueDateInputLabel.setAttribute("id","dueDateInput");
+    dueDateInputLabel.setAttribute("for","dueDateInput");
     dueDateInputLabel.innerHTML = "Due Date:";
 
     const dueDateInput = document.createElement("input");
@@ -53,7 +53,7 @@ const TodoEditView = (function(){
     dueDateInput.setAttribute("id","dueDateInput");
 
     const prioritySelectLabel = document.createElement("label");
-    prioritySelectLabel.setAttribute("id","prioritySelect");
+    prioritySelectLabel.setAttribute("for","prioritySelect");
     prioritySelectLabel.innerHTML = "Priority:";
 
     const prioritySelect = document.createElement("select");

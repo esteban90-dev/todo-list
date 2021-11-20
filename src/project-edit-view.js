@@ -36,6 +36,7 @@ const ProjectEditView = (function(){
     titleInput.setAttribute("type","text");
     titleInput.setAttribute("id","titleInput");
     titleInput.setAttribute("name","title");
+    titleInput.setAttribute("required",true);
     titleInput.setAttribute("value",project.getTitle());
 
     //create description field
@@ -47,6 +48,7 @@ const ProjectEditView = (function(){
     descInput.setAttribute("type","text");
     descInput.setAttribute("id","descInput");
     descInput.setAttribute("name","description");
+    descInput.setAttribute("required",true);
     descInput.setAttribute("value",project.getDescription());
 
     //create form submission button

@@ -31,6 +31,7 @@ const TodoEditView = (function(){
     titleInput.setAttribute("name","title");
     titleInput.setAttribute("value",todo.getTitle());
     titleInput.setAttribute("id","titleInput");
+    titleInput.setAttribute("required",true);
 
     const descriptionInputLabel = document.createElement("label");
     descriptionInputLabel.setAttribute("for","descriptionInput");
@@ -41,6 +42,7 @@ const TodoEditView = (function(){
     descriptionInput.setAttribute("name","description");
     descriptionInput.setAttribute("value",todo.getDescription());
     descriptionInput.setAttribute("id","descriptionInput");
+    descriptionInput.setAttribute("required",true);
 
     const dueDateInputLabel = document.createElement("label");
     dueDateInputLabel.setAttribute("for","dueDateInput");

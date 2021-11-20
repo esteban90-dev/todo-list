@@ -29,6 +29,7 @@ const TodoNewView = (function(){
     titleInput.setAttribute("type","text");
     titleInput.setAttribute("name","title");
     titleInput.setAttribute("id","titleInput");
+    titleInput.setAttribute("required",true);
 
     const descriptionInputLabel = document.createElement("label");
     descriptionInputLabel.setAttribute("for","descriptionInput");
@@ -38,6 +39,7 @@ const TodoNewView = (function(){
     descriptionInput.setAttribute("type","text");
     descriptionInput.setAttribute("name","description");
     descriptionInput.setAttribute("id","descriptionInput");
+    descriptionInput.setAttribute("required",true);
 
     const dueDateInputLabel = document.createElement("label");
     dueDateInputLabel.setAttribute("for","dueDateInput");

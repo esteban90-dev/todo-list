@@ -36,6 +36,7 @@ const ProjectNewView = (function(){
     titleInput.setAttribute("type","text");
     titleInput.setAttribute("id","titleInput");
     titleInput.setAttribute("name","title");
+    titleInput.setAttribute("required",true);
 
     //create description field
     const descLabel = document.createElement("label");
@@ -46,6 +47,7 @@ const ProjectNewView = (function(){
     descInput.setAttribute("type","text");
     descInput.setAttribute("id","descInput");
     descInput.setAttribute("name","description");
+    descInput.setAttribute("required",true);
 
     //create form submission button
     const submit = document.createElement("input");

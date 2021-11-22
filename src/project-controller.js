@@ -67,7 +67,17 @@ const ProjectController = (function(){
   }
 
   function show(event){
-    const projectId = parseInt(event.target.getAttribute("data-project-id"));
+    //normally this method is called by a clicking on a project's title and the event 
+    //parameter will be an 'event' object but when the application first loads, 
+    //the show method is called by index.js. In this case the 'event' parameter will 
+    //not be an 'event' object but just an integer representing the projectId
+
+    if(event.target){
+      var projectId = parseInt(event.target.getAttribute("data-project-id"));
+    } else {
+      var projectId = event;
+    }
+    
     const project = projectModel.read(projectId);
     const todos = todoModel.getTodos(projectId);
 
@@ -149,7 +159,7 @@ const ProjectController = (function(){
     }
   }
 
-  return { initialize, index, show };
+  return { initialize, show };
 })(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView, ProjectEditView, ControllerInterface);
 
 export default ProjectController;

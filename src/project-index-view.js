@@ -8,6 +8,14 @@ const ProjectIndexView = (function(){
     //clear app element
     clear(app); 
 
+    //display projects heading
+    const h4 = document.createElement("h4");
+    h4.innerHTML = "Projects";
+    h4.classList.add("fw-bold","text-center");
+
+    //append to app element
+    app.appendChild(h4);
+
     //display projects
     for(let i=0; i<projects.length; i++){
       //create title element
@@ -45,10 +53,16 @@ const ProjectIndexView = (function(){
     //display new project button
     const button = document.createElement("input");
     button.setAttribute("type","button");
-    button.setAttribute("value","new project");
+    button.setAttribute("value","New Project");
     button.setAttribute("id","new");
+    button.classList.add("bg-white","pr-4","pl-4","pt-2","pb-2","border","border-radius-5", "cursor-pointer", "hover-border");
 
-    app.appendChild(button);
+    const row = document.createElement("div");
+    row.classList.add("row", "justify-center");
+
+    row.appendChild(button);
+
+    app.appendChild(row);
   }
 
   function handleClickEditProject(handler){

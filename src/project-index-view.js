@@ -55,7 +55,7 @@ const ProjectIndexView = (function(){
     button.setAttribute("type","button");
     button.setAttribute("value","New Project");
     button.setAttribute("id","new");
-    button.classList.add("bg-white","pr-4","pl-4","pt-2","pb-2","border","border-radius-5", "cursor-pointer", "hover-border");
+    button.classList.add("width-4","bg-white","pr-4","pl-4","pt-2","pb-2","border","border-radius-5", "cursor-pointer", "hover-border");
 
     const row = document.createElement("div");
     row.classList.add("row", "justify-center");

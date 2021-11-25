@@ -42,7 +42,7 @@ const TodoNewView = (function(){
 
     const row5 = document.createElement("div");
     row5.classList.add("row");
-    row5.classList.add("pt-0");
+    row5.classList.add("pb-0");
 
     const row6 = document.createElement("div");
     row6.classList.add("row");
@@ -50,7 +50,7 @@ const TodoNewView = (function(){
 
     const row7 = document.createElement("div");
     row7.classList.add("row");
-    row7.classList.add("pt-0");
+    row7.classList.add("pb-0");
 
     const row8 = document.createElement("div");
     row8.classList.add("row");

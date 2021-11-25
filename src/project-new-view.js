@@ -14,7 +14,7 @@ const ProjectNewView = (function(){
     //display the new project form
     app.appendChild(_createProjectForm());
 
-    //display 'back to projects' lnk
+    //display cancel button
     app.appendChild(_createCancelButton());
   }
 

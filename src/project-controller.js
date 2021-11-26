@@ -67,7 +67,11 @@ const ProjectController = (function(){
   }
 
   function show(event){
-    const projectId = parseInt(event.target.getAttribute("data-project-id"));
+    //use 'currentTarget' instead of 'target' because the 'back to project' link on 
+    //the todo show view has nested children which may be the target even though the 
+    //listener is attached to the parent anchor element
+
+    const projectId = parseInt(event.currentTarget.getAttribute("data-project-id"));  
     const project = projectModel.read(projectId);
     const todos = todoModel.getTodos(projectId);
 

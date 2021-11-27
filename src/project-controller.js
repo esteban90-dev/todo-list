@@ -104,8 +104,8 @@ const ProjectController = (function(){
     //update project
     ProjectModel.update(projectId, newTitle, newDescription);
 
-    //render project index
-    index();
+    //render project show
+    show(event);
   }
 
   function destroy(event){
@@ -129,8 +129,8 @@ const ProjectController = (function(){
   function _bindIndexButtons(){
     //bind buttons to appropriate controller methods
     projectIndexView.handleClickShow(show);
-    projectIndexView.handleClickEditProject(edit);
-    projectIndexView.handleClickDeleteProject(destroy);
+    //projectIndexView.handleClickEditProject(edit);
+    //projectIndexView.handleClickDeleteProject(destroy);
 
     //bind project new button to 'new' method
     projectIndexView.handleClickNew(neW);
@@ -151,6 +151,8 @@ const ProjectController = (function(){
   function _bindShowButtons(todos){
     //bind buttons to appropriate controller methods
     projectShowView.handleClickBack(index);
+    projectShowView.handleClickEditProject(edit);
+    projectShowView.handleClickDeleteProject(destroy);
     projectShowView.handleClickNewTodo(controllerInterface.getTodoNew());
 
     //if there are any todos on the show view, bind their button events to the appropriate method in the Todo Controller

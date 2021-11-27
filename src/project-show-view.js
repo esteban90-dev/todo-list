@@ -10,11 +10,8 @@ const TodoIndexView = (function(){
     //display 'back to projects' link
     app.appendChild(_createBackLink());
 
-    //display project title
-    app.appendChild(_createProjectTitleHeading(project));
-
-    //display project description
-    app.appendChild(_createProjectDescHeading(project));
+    //display project
+    app.appendChild(_createProject(project));
 
     //display todos
     app.appendChild(_createTodos(todos));
@@ -23,18 +20,49 @@ const TodoIndexView = (function(){
     app.appendChild(_createNewTodoButton(project));
   }
 
-  function _createProjectTitleHeading(project){
+  function _createProject(project){
+    const row = document.createElement("div");
+    row.classList.add("row");
+
+    const col1 = document.createElement("div");
+    col1.classList.add("col-10");
+
+    const col2 = document.createElement("div");
+    col2.classList.add("col-2","display-flex","justify-between","align-center");
+
+    //create project title
     const h4 = document.createElement("h4");
     h4.innerHTML = "project: " + project.getTitle();
     h4.classList.add("text-center","fw-bold","mt-3");
-    return h4;
-  }
 
-  function _createProjectDescHeading(project){
+    //create project description
     const p = document.createElement("p");
     p.innerHTML = "description: " + project.getDescription();
     p.classList.add("text-center","mb-3");
-    return p;
+
+    //create project edit link
+    const editI = document.createElement("i");
+    editI.setAttribute("data-project-id",project.getId());
+    editI.setAttribute("id","edit");
+    editI.classList.add("fas","fa-pencil-alt","cursor-pointer");
+
+    //create project delete link
+    const deleteI = document.createElement("i");
+    deleteI.setAttribute("data-project-id",project.getId());
+    deleteI.setAttribute("id","delete");
+    deleteI.classList.add("fas","fa-trash-alt","cursor-pointer");
+
+    //add elements to columns
+    col1.appendChild(h4);
+    col1.appendChild(p);
+    col2.appendChild(editI);
+    col2.appendChild(deleteI);
+    
+    //add columns to row
+    row.appendChild(col1);
+    row.appendChild(col2);
+
+    return row;
   }
 
   function _createTodos(todos){
@@ -158,6 +186,22 @@ const TodoIndexView = (function(){
     return row;
   }
 
+  function handleClickEditProject(handler){
+    const editLinks = document.querySelectorAll("#edit");
+
+    editLinks.forEach( (link) => {
+      link.addEventListener('click',handler);
+    })
+  }
+
+  function handleClickDeleteProject(handler){
+    const deleteLinks = document.querySelectorAll("#delete");
+
+    deleteLinks.forEach( (link) => {
+      link.addEventListener('click',handler);
+    })
+  }
+
   function handleClickBack(handler){
     document.querySelector("#back").addEventListener('click', handler);
   }
@@ -198,7 +242,7 @@ const TodoIndexView = (function(){
     });
   }
 
-  return { render, handleClickBack, handleClickEditTodo, handleClickDeleteTodo, handleClickNewTodo, handleCheckTodo, handleClickShowTodo };
+  return { render, handleClickBack, handleClickEditProject, handleClickDeleteProject, handleClickEditTodo, handleClickDeleteTodo, handleClickNewTodo, handleCheckTodo, handleClickShowTodo };
 })(clearChildren);
 
 export default TodoIndexView;

@@ -36,7 +36,7 @@ const ProjectIndexView = (function(){
     pTitle.classList.add("text-underline");
 
     const col1 = document.createElement("div");
-    col1.classList.add("col-4");
+    col1.classList.add("col-6","text-center");
     col1.appendChild(pTitle);
 
     const pDesc = document.createElement("p");
@@ -44,7 +44,7 @@ const ProjectIndexView = (function(){
     pDesc.classList.add("text-underline");
 
     const col2 = document.createElement("div");
-    col2.classList.add("col-6");
+    col2.classList.add("col-6","text-center");
     col2.appendChild(pDesc);
 
     const row = document.createElement("row");
@@ -75,7 +75,7 @@ const ProjectIndexView = (function(){
 
         //add title element to column
         const col1 = document.createElement("div");
-        col1.classList.add("col-4");
+        col1.classList.add("col-6","text-center");
         col1.appendChild(a1);
 
         //create description element
@@ -84,32 +84,14 @@ const ProjectIndexView = (function(){
 
         //add desc element to column
         const col2 = document.createElement("div");
-        col2.classList.add("col-6");
+        col2.classList.add("col-6","text-center");
         col2.appendChild(p);
-
-        //create project edit link
-        const editI = document.createElement("i");
-        editI.setAttribute("data-project-id",projects[i].getId());
-        editI.setAttribute("id","edit");
-        editI.classList.add("fas","fa-pencil-alt","cursor-pointer");
-
-        //create project delete link
-        const deleteI = document.createElement("i");
-        deleteI.setAttribute("data-project-id",projects[i].getId());
-        deleteI.setAttribute("id","delete");
-        deleteI.classList.add("fas","fa-trash-alt","cursor-pointer");
-
-        //add edit/delete links to column
-        const col3 = document.createElement("div");
-        col3.classList.add("col-2", "display-flex","justify-between");
-        col3.appendChild(editI);
-        col3.appendChild(deleteI);
 
         //add columns to row
         row.classList.add("row","pt-0","pb-0");
         row.appendChild(col1);
         row.appendChild(col2);
-        row.appendChild(col3);
+        //row.appendChild(col3);
       }
     }
     return row;
@@ -129,22 +111,6 @@ const ProjectIndexView = (function(){
     return row;
   }
 
-  function handleClickEditProject(handler){
-    const editLinks = document.querySelectorAll("#edit");
-
-    editLinks.forEach( (link) => {
-      link.addEventListener('click',handler);
-    })
-  }
-
-  function handleClickDeleteProject(handler){
-    const deleteLinks = document.querySelectorAll("#delete");
-
-    deleteLinks.forEach( (link) => {
-      link.addEventListener('click',handler);
-    })
-  }
-
   function handleClickNew(handler){
     document.querySelector("#new").addEventListener('click',handler);
   }
@@ -157,7 +123,7 @@ const ProjectIndexView = (function(){
     })
   }
 
-  return { render, handleClickNew, handleClickEditProject, handleClickDeleteProject, handleClickShow };
+  return { render, handleClickNew, handleClickShow };
 })(clearChildren);
 
 export default ProjectIndexView;

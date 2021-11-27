@@ -41,74 +41,83 @@ const TodoIndexView = (function(){
     //create div to add rows to
     const div = document.createElement("div");
 
-    //display the todos
-    for(let i=0; i<todos.length; i++){
-      //create row to contain todo in 
-      const row = document.createElement("div");
-      row.classList.add("row");
+    if(todos.length === 0){
+      //display 'no todos yet''
+      const p = document.createElement('p');
+      p.classList.add("text-center","mt-3");
+      p.innerHTML = "no todos yet";
+      div.appendChild(p);
+    } else {
 
-      //create todo complete checkbox
-      let checkBox = document.createElement("input");
-      checkBox.setAttribute("type","checkbox");
-      checkBox.setAttribute("id","complete");
-      checkBox.setAttribute("data-todo-id",todos[i].getId());
-      checkBox.setAttribute("data-project-id",todos[i].getProjectId());
+      //display the todos
+      for(let i=0; i<todos.length; i++){
+        //create row to contain todo in 
+        const row = document.createElement("div");
+        row.classList.add("row");
 
-      //set the checkbox checked if the todo is completed
-      if(todos[i].getIsComplete()){
-        checkBox.setAttribute("checked",true);
+        //create todo complete checkbox
+        let checkBox = document.createElement("input");
+        checkBox.setAttribute("type","checkbox");
+        checkBox.setAttribute("id","complete");
+        checkBox.setAttribute("data-todo-id",todos[i].getId());
+        checkBox.setAttribute("data-project-id",todos[i].getProjectId());
+
+        //set the checkbox checked if the todo is completed
+        if(todos[i].getIsComplete()){
+          checkBox.setAttribute("checked",true);
+        }
+
+        //add checkbox to column and add column to row
+        const col1 = document.createElement("div");
+        col1.classList.add("col-1","display-flex","justify-center","align-center");
+        col1.appendChild(checkBox);
+        row.appendChild(col1);
+
+        //create todo title (contains show link), add to column, then add to row
+        let a1 = document.createElement('a');
+        a1.setAttribute("data-todo-id",todos[i].getId());
+        a1.setAttribute("href","#");
+        a1.setAttribute("id","show");
+        a1.innerHTML = todos[i].getTitle();
+
+        //add a strikethrough if the todo is completed
+        if(todos[i].getIsComplete()){
+          a1.classList.add("line-through");
+        }
+
+        //add todo title to column
+        const col2 = document.createElement("div");
+        col2.classList.add("col-9");
+        col2.appendChild(a1);
+        
+        //create todo due date and add to same column as todo title, then add both to row
+        let p2 = document.createElement('p');
+        p2.innerHTML = todos[i].getDueDate();
+        p2.classList.add("text-gray-600");
+        col2.appendChild(p2);
+        row.appendChild(col2);
+
+        //create todo edit/delete links, add to column, then add to row
+        const editI = document.createElement("i");
+        editI.setAttribute("data-todo-id",todos[i].getId());
+        editI.setAttribute("id","edit");
+        editI.classList.add("fas","fa-pencil-alt","cursor-pointer");
+
+        const deleteI = document.createElement("i");
+        deleteI.setAttribute("data-todo-id",todos[i].getId());
+        deleteI.setAttribute("data-project-id",todos[i].getProjectId());
+        deleteI.setAttribute("id","delete");
+        deleteI.classList.add("fas","fa-trash-alt","cursor-pointer");
+
+        const col3 = document.createElement("div");
+        col3.classList.add("col-2","display-flex","justify-between","align-center");
+        col3.appendChild(editI);
+        col3.appendChild(deleteI);
+        row.appendChild(col3);
+
+        //add row to div
+        div.appendChild(row);
       }
-
-      //add checkbox to column and add column to row
-      const col1 = document.createElement("div");
-      col1.classList.add("col-1","display-flex","justify-center","align-center");
-      col1.appendChild(checkBox);
-      row.appendChild(col1);
-
-      //create todo title (contains show link), add to column, then add to row
-      let a1 = document.createElement('a');
-      a1.setAttribute("data-todo-id",todos[i].getId());
-      a1.setAttribute("href","#");
-      a1.setAttribute("id","show");
-      a1.innerHTML = todos[i].getTitle();
-
-      //add a strikethrough if the todo is completed
-      if(todos[i].getIsComplete()){
-        a1.classList.add("line-through");
-      }
-
-      //add todo title to column
-      const col2 = document.createElement("div");
-      col2.classList.add("col-9");
-      col2.appendChild(a1);
-      
-      //create todo due date and add to same column as todo title, then add both to row
-      let p2 = document.createElement('p');
-      p2.innerHTML = todos[i].getDueDate();
-      p2.classList.add("text-gray-600");
-      col2.appendChild(p2);
-      row.appendChild(col2);
-
-      //create todo edit/delete links, add to column, then add to row
-      const editI = document.createElement("i");
-      editI.setAttribute("data-todo-id",todos[i].getId());
-      editI.setAttribute("id","edit");
-      editI.classList.add("fas","fa-pencil-alt","cursor-pointer");
-
-      const deleteI = document.createElement("i");
-      deleteI.setAttribute("data-todo-id",todos[i].getId());
-      deleteI.setAttribute("data-project-id",todos[i].getProjectId());
-      deleteI.setAttribute("id","delete");
-      deleteI.classList.add("fas","fa-trash-alt","cursor-pointer");
-
-      const col3 = document.createElement("div");
-      col3.classList.add("col-2","display-flex","justify-between","align-center");
-      col3.appendChild(editI);
-      col3.appendChild(deleteI);
-      row.appendChild(col3);
-
-      //add row to div
-      div.appendChild(row);
     }
     return div;
   }

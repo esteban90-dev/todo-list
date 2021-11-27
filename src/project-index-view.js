@@ -11,9 +11,11 @@ const ProjectIndexView = (function(){
     //display projects heading
     app.appendChild(_createProjectHeading());
 
-    //display column headings
-    app.appendChild(_createColumnHeadings());
-
+    //display column headings if projects exist
+    if(projects.length > 0){
+      app.appendChild(_createColumnHeadings());
+    }
+    
     //display projects
     app.appendChild(_createProjectElements(projects));
 
@@ -59,6 +61,7 @@ const ProjectIndexView = (function(){
     if(projects.length === 0){
       //display 'no new projects'
       const p = document.createElement('p');
+      p.classList.add("text-center","mt-3");
       p.innerHTML = "no projects yet";
       app.appendChild(p);
     } else {

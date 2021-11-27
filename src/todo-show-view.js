@@ -5,16 +5,22 @@ const TodoShowView = (function(){
   const clear = clearChildren;
 
   function render(todo){
+    //clear app container
     clear(app);
-    _renderBackLink(todo.getProjectId());
 
-    const pTitle = document.createElement('p');
-    pTitle.innerHTML = "Title: " + todo.getTitle();
+    //display 'back to projects' link
+    app.appendChild(_createBackLink(todo.getProjectId()));
+
+    const h4 = document.createElement('h4');
+    h4.innerHTML = todo.getTitle();
+    h4.classList.add("text-center","fw-bold","mb-3");
 
     const pDescription = document.createElement('p');
     pDescription.innerHTML = "Description: " + todo.getDescription();
+    pDescription.classList.add("text-center");
 
     const pDueDate = document.createElement('p');
+    pDueDate.classList.add("text-center");
 
     if(todo.getDueDate()){
       pDueDate.innerHTML = "Due Date: " + todo.getDueDate();
@@ -22,36 +28,56 @@ const TodoShowView = (function(){
       pDueDate.innerHTML = "Due Date: n/a";
     }
 
-    const pPriority = document.createElement('p');
-    pPriority.innerHTML = "Priority: " + todo.getPriority();
+    const priorityDiv = document.createElement('div');
+    priorityDiv.classList.add("display-flex","justify-center","align-center");
 
-    const pIsComplete = document.createElement('p');
+    const p1 = document.createElement('p');
+    p1.innerHTML = "Priority:";
 
-    if(todo.getIsComplete()){
-      pIsComplete.innerHTML = "Completed: yes";
-    } else {
-      pIsComplete.innerHTML = "Completed: no";
+    const p2= document.createElement('p');
+    p2.innerHTML = todo.getPriority();
+    p2.classList.add("ml-1");
+
+    if(todo.getPriority() === 'medium'){
+      p2.classList.add("text-orange");
+    } else if (todo.getPriority() === 'high'){
+      p2.classList.add("text-red");
     }
-    
 
-    app.appendChild(pTitle);
+    priorityDiv.appendChild(p1);
+    priorityDiv.appendChild(p2);
+
+    app.appendChild(h4);
     app.appendChild(pDescription);
     app.appendChild(pDueDate);
-    app.appendChild(pPriority);
-    app.appendChild(pIsComplete);
+    app.appendChild(priorityDiv);
   }
 
-  function _renderBackLink(projectId){
-    const back = document.createElement("a");
-    back.setAttribute("href","#");
-    back.innerHTML = "back to project";
-    back.setAttribute("data-project-id",projectId);
-    back.setAttribute("id","back");
-    app.appendChild(back);
+  function _createBackLink(projectId){
+    const i = document.createElement("i");
+    i.classList.add("fas","fa-arrow-left","mr-2");
+
+    const p = document.createElement("p");
+    p.innerHTML = "back to project";
+
+    const a = document.createElement('a');
+    a.setAttribute("href","#");
+    a.setAttribute("id","back");
+    a.setAttribute("data-project-id",projectId);
+    a.classList.add("display-flex","align-center","link-no-underline");
+    a.appendChild(i);
+    a.appendChild(p);
+
+    const row = document.createElement("div");
+    row.classList.add("row");
+    row.appendChild(a);
+
+    return row;
   }
 
   function handleClickBack(handler){
-    document.querySelector("#back").addEventListener('click', handler);
+    const back = document.querySelector("#back");
+    back.addEventListener('click', handler);
   }
 
   return { render, handleClickBack };

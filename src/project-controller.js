@@ -73,7 +73,10 @@ const ProjectController = (function(){
     //not be an 'event' object but just an integer representing the projectId
 
     if(event.target){
-      var projectId = parseInt(event.target.getAttribute("data-project-id"));
+      //use 'currentTarget' instead of 'target' because the 'back to project' link on 
+      //the todo show view has nested children which may be the target even though the 
+      //listener is attached to the parent anchor element
+      var projectId = parseInt(event.currentTarget.getAttribute("data-project-id"));
     } else {
       var projectId = event;
     }

@@ -62,52 +62,53 @@ const ProjectIndexView = (function(){
       p.innerHTML = "no projects yet";
       app.appendChild(p);
     } else {
-        for(let i=0; i<projects.length; i++){
-          //create title element
-          const a1 = document.createElement("a");
-          a1.setAttribute("data-project-id",projects[i].getId());
-          a1.setAttribute("href","#")
-          a1.innerHTML = projects[i].getTitle();
-          a1.setAttribute("id","show");
+      for(let i=0; i<projects.length; i++){
+        //create title element
+        const a1 = document.createElement("a");
+        a1.setAttribute("data-project-id",projects[i].getId());
+        a1.setAttribute("href","#")
+        a1.innerHTML = projects[i].getTitle();
+        a1.setAttribute("id","show");
 
-          //add title element to column
-          const col1 = document.createElement("div");
-          col1.classList.add("col-4");
-          col1.appendChild(a1);
+        //add title element to column
+        const col1 = document.createElement("div");
+        col1.classList.add("col-4");
+        col1.appendChild(a1);
 
-          //create description element
-          const p = document.createElement("p");
-          p.innerHTML = projects[i].getDescription();
+        //create description element
+        const p = document.createElement("p");
+        p.innerHTML = projects[i].getDescription();
 
-          //add desc element to column
-          const col2 = document.createElement("div");
-          col2.classList.add("col-6");
-          col2.appendChild(p);
+        //add desc element to column
+        const col2 = document.createElement("div");
+        col2.classList.add("col-6");
+        col2.appendChild(p);
 
-          //create project edit link
-          const editI = document.createElement("i");
-          editI.setAttribute("data-project-id",projects[i].getId());
-          editI.setAttribute("id","edit");
-          editI.classList.add("fas","fa-pencil-alt","cursor-pointer");
+        //create project edit link
+        const editI = document.createElement("i");
+        editI.setAttribute("data-project-id",projects[i].getId());
+        editI.setAttribute("id","edit");
+        editI.classList.add("fas","fa-pencil-alt","cursor-pointer");
 
-          //create project delete link
-          const deleteI = document.createElement("i");
-          deleteI.setAttribute("data-project-id",projects[i].getId());
-          deleteI.setAttribute("id","delete");
-          deleteI.classList.add("fas","fa-trash-alt","cursor-pointer");
+        //create project delete link
+        const deleteI = document.createElement("i");
+        deleteI.setAttribute("data-project-id",projects[i].getId());
+        deleteI.setAttribute("id","delete");
+        deleteI.classList.add("fas","fa-trash-alt","cursor-pointer");
 
-          //add edit/delete links to column
-          const col3 = document.createElement("div");
-          col3.classList.add("col-2", "display-flex","justify-between");
-          col3.appendChild(editI);
-          col3.appendChild(deleteI);
+        //add edit/delete links to column
+        const col3 = document.createElement("div");
+        col3.classList.add("col-2", "display-flex","justify-between");
+        col3.appendChild(editI);
+        col3.appendChild(deleteI);
 
-          //add columns to row
-          row.classList.add("row","pt-0","pb-0");
-          row.appendChild(col1);
-          row.appendChild(col2);
-          row.appendChild(col3);
+        //add columns to row
+        row.classList.add("row","pt-0","pb-0");
+        row.appendChild(col1);
+        row.appendChild(col2);
+        row.appendChild(col3);
       }
+    }
     return row;
   }
 

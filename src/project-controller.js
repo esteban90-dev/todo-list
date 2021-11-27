@@ -67,11 +67,20 @@ const ProjectController = (function(){
   }
 
   function show(event){
-    //use 'currentTarget' instead of 'target' because the 'back to project' link on 
-    //the todo show view has nested children which may be the target even though the 
-    //listener is attached to the parent anchor element
+    //normally this method is called by a clicking on a project's title and the event 
+    //parameter will be an 'event' object but when the application first loads, 
+    //the show method is called by index.js. In this case the 'event' parameter will 
+    //not be an 'event' object but just an integer representing the projectId
 
-    const projectId = parseInt(event.currentTarget.getAttribute("data-project-id"));  
+    if(event.target){
+      //use 'currentTarget' instead of 'target' because the 'back to project' link on 
+      //the todo show view has nested children which may be the target even though the 
+      //listener is attached to the parent anchor element
+      var projectId = parseInt(event.currentTarget.getAttribute("data-project-id"));
+    } else {
+      var projectId = event;
+    }
+    
     const project = projectModel.read(projectId);
     const todos = todoModel.getTodos(projectId);
 
@@ -153,7 +162,7 @@ const ProjectController = (function(){
     }
   }
 
-  return { initialize, index, show };
+  return { initialize, show };
 })(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView, ProjectEditView, ControllerInterface);
 
 export default ProjectController;

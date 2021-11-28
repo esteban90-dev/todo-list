@@ -21,53 +21,64 @@ const TodoIndexView = (function(){
   }
 
   function _createProject(project){
-    const row = document.createElement("div");
-    row.classList.add("row");
+    //create row for project title/description
+    const row1 = document.createElement("div");
+    row1.classList.add("row","pb-0");
 
     const col1 = document.createElement("div");
-    col1.classList.add("col-10");
+    col1.classList.add("col-12");
 
-    const col2 = document.createElement("div");
-    col2.classList.add("col-2","display-flex","justify-between","align-center");
-
-    //create project title
     const h4 = document.createElement("h4");
     h4.innerHTML = "project: " + project.getTitle();
     h4.classList.add("text-center","fw-bold","mt-3");
 
-    //create project description
     const p = document.createElement("p");
     p.innerHTML = "description: " + project.getDescription();
     p.classList.add("text-center","mb-3");
 
-    //create project edit link
+    col1.appendChild(h4);
+    col1.appendChild(p);
+    row1.appendChild(col1);
+
+    //create row for project edit/delete link
+    const row2 = document.createElement("div");
+    row2.classList.add("row","pt-0");
+
+    const col2 = document.createElement("div");
+    col2.classList.add("col-12","display-flex","justify-center");
+
     const editI = document.createElement("i");
     editI.setAttribute("data-project-id",project.getId());
     editI.setAttribute("id","edit");
-    editI.classList.add("fas","fa-pencil-alt","cursor-pointer");
+    editI.classList.add("fas","fa-pencil-alt","cursor-pointer","mr-1");
 
-    //create project delete link
     const deleteI = document.createElement("i");
     deleteI.setAttribute("data-project-id",project.getId());
     deleteI.setAttribute("id","delete");
-    deleteI.classList.add("fas","fa-trash-alt","cursor-pointer");
+    deleteI.classList.add("fas","fa-trash-alt","cursor-pointer","ml-1");
 
-    //add elements to columns
-    col1.appendChild(h4);
-    col1.appendChild(p);
     col2.appendChild(editI);
     col2.appendChild(deleteI);
+    row2.appendChild(col2);
     
-    //add columns to row
-    row.appendChild(col1);
-    row.appendChild(col2);
+    //add rows to div
+    const div = document.createElement("div");
+    div.appendChild(row1);
+    div.appendChild(row2);
 
-    return row;
+    return div;
   }
 
   function _createTodos(todos){
     //create div to add rows to
     const div = document.createElement("div");
+    div.classList.add("mt-4","mb-4");
+
+    //display todos heading
+    const pHeading = document.createElement("p");
+    pHeading.innerHTML = "Todos";
+    pHeading.classList.add("text-center","text-underline");
+    div.appendChild(pHeading);
 
     if(todos.length === 0){
       //display 'no todos yet''

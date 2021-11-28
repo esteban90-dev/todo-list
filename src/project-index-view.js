@@ -61,7 +61,7 @@ const ProjectIndexView = (function(){
     if(projects.length === 0){
       //display 'no new projects'
       const p = document.createElement('p');
-      p.classList.add("text-center","mt-3");
+      p.classList.add("text-center","mt-3","text-gray-500");
       p.innerHTML = "no projects yet";
       app.appendChild(p);
     } else {

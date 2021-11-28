@@ -72,7 +72,7 @@ const TodoIndexView = (function(){
     if(todos.length === 0){
       //display 'no todos yet''
       const p = document.createElement('p');
-      p.classList.add("text-center","mt-3");
+      p.classList.add("text-center","mt-3","text-gray-500");
       p.innerHTML = "no todos yet";
       div.appendChild(p);
     } else {

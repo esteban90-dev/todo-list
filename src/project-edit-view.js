@@ -15,7 +15,7 @@ const ProjectEditView = (function(){
     app.appendChild(_createProjectForm(project));
 
     //display cancel button
-    app.appendChild(_createCancelButton());
+    app.appendChild(_createCancelButton(project));
   }
 
   function _createProjectForm(project){
@@ -99,12 +99,13 @@ const ProjectEditView = (function(){
     return h4;
   }
 
-  function _createCancelButton(){
+  function _createCancelButton(project){
     const cancel = document.createElement("input");
     cancel.setAttribute("type","submit");
     cancel.setAttribute("value","Cancel");
     cancel.classList.add("width-4","bg-white","pr-4","pl-4","pt-2","pb-2","border","border-radius-5", "cursor-pointer", "hover-border");
     cancel.setAttribute("id","back");
+    cancel.setAttribute("data-project-id",project.getId());
 
     const row = document.createElement("div");
     row.classList.add("row", "justify-center");

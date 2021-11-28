@@ -133,7 +133,7 @@ const TodoController = (function(){
   function _bindEditButtons(){
     //bind buttons to appropriate controller methods
     todoEditView.handleFormSubmit(update);
-    todoEditView.handleClickBack(controllerInterface.getProjectShow());
+    todoEditView.handleClickBack(show);
   }
 
   return { initialize, neW, complete, show, edit, destroy };

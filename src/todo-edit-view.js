@@ -15,7 +15,7 @@ const TodoEditView = (function(){
     app.appendChild(_createTodoForm(todo));
 
     //display cancel button
-    app.appendChild(_createCancelButton(todo.getProjectId()));
+    app.appendChild(_createCancelButton(todo));
   }
 
   function _createEditTodoHeading(){
@@ -162,11 +162,11 @@ const TodoEditView = (function(){
     return form;
   }
 
-  function _createCancelButton(projectId){
+  function _createCancelButton(todo){
     const cancel = document.createElement("input");
     cancel.setAttribute("type","submit");
     cancel.setAttribute("value","Cancel");
-    cancel.setAttribute("data-project-id",projectId);
+    cancel.setAttribute("data-todo-id",todo.getId());
     cancel.classList.add("width-4","bg-white","pr-4","pl-4","pt-2","pb-2","border","border-radius-5", "cursor-pointer", "hover-border");
     cancel.setAttribute("id","back");
 

@@ -145,7 +145,7 @@ const ProjectController = (function(){
   function _bindEditButtons(){
     //bind buttons to appropriate controller methods
     projectEditView.handleFormSubmit(update);
-    projectNewView.handleClickBack(index);
+    projectNewView.handleClickBack(show);
   }
 
   function _bindShowButtons(todos){

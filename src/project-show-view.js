@@ -21,7 +21,7 @@ const TodoIndexView = (function(){
   }
 
   function _createProject(project){
-    //create row for project title/description
+    //create row for project title
     const row1 = document.createElement("div");
     row1.classList.add("row","pb-0");
 
@@ -29,23 +29,46 @@ const TodoIndexView = (function(){
     col1.classList.add("col-12");
 
     const h4 = document.createElement("h4");
-    h4.innerHTML = "project: " + project.getTitle();
+    h4.innerHTML = "Project: " + project.getTitle();
     h4.classList.add("text-center","fw-bold","mt-3");
 
-    const p = document.createElement("p");
-    p.innerHTML = "description: " + project.getDescription();
-    p.classList.add("text-center","mb-3");
-
     col1.appendChild(h4);
-    col1.appendChild(p);
     row1.appendChild(col1);
 
-    //create row for project edit/delete link
+    //create row for project description heading
     const row2 = document.createElement("div");
-    row2.classList.add("row","pt-0");
+    row2.classList.add("row","pb-0");
 
     const col2 = document.createElement("div");
-    col2.classList.add("col-12","display-flex","justify-center");
+    col2.classList.add("col-12");
+
+    const p1 = document.createElement("p");
+    p1.innerHTML = "Description";
+    p1.classList.add("text-center","text-underline");
+
+    col2.appendChild(p1);
+    row2.appendChild(col2);
+
+    //create row for project description
+    const row3 = document.createElement("div");
+    row3.classList.add("row","pt-0");
+
+    const col3 = document.createElement("div");
+    col3.classList.add("col-12");
+
+    const p2 = document.createElement("p");
+    p2.innerHTML = project.getDescription();
+    p2.classList.add("text-center");
+
+    col3.appendChild(p2);
+    row3.appendChild(col3);
+
+    //create row for project edit/delete link
+    const row4 = document.createElement("div");
+    row4.classList.add("row","pt-0");
+
+    const col4 = document.createElement("div");
+    col4.classList.add("col-12","display-flex","justify-center");
 
     const editI = document.createElement("i");
     editI.setAttribute("data-project-id",project.getId());
@@ -57,14 +80,16 @@ const TodoIndexView = (function(){
     deleteI.setAttribute("id","delete");
     deleteI.classList.add("fas","fa-trash-alt","cursor-pointer","ml-1");
 
-    col2.appendChild(editI);
-    col2.appendChild(deleteI);
-    row2.appendChild(col2);
+    col4.appendChild(editI);
+    col4.appendChild(deleteI);
+    row4.appendChild(col4);
     
     //add rows to div
     const div = document.createElement("div");
     div.appendChild(row1);
     div.appendChild(row2);
+    div.appendChild(row3);
+    div.appendChild(row4);
 
     return div;
   }

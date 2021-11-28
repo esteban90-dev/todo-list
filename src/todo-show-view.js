@@ -11,115 +11,133 @@ const TodoShowView = (function(){
     //display 'back to projects' link
     app.appendChild(_createBackLink(todo.getProjectId()));
 
-    //create row for todo title
-    const row1 = document.createElement("div");
-    row1.classList.add("row");
+    //display 'todo' heading
+    app.appendChild(_createTodoHeading(todo.getTitle()));
 
-    const col1 = document.createElement("div");
-    col1.classList.add("col-3");
+    //create todo description heading
+    app.appendChild(_createHeading("Description"));
 
-    const col2 = document.createElement("div");
-    col2.classList.add("col-9");
+    //create todo description element
+    app.appendChild(_createElement(todo.getDescription()));
 
-    const h4_1 = document.createElement('h4');
-    h4_1.innerHTML = "todo:";
-    h4_1.classList.add("text-right","fw-bold","mb-3");
+    //create todo due date heading
+    app.appendChild(_createHeading("Due Date"));
 
-    const h4_2 = document.createElement('h4');
-    h4_2.innerHTML = todo.getTitle();
-    h4_2.classList.add("text-left","fw-bold","mb-3");
+    //create todo due date element
+    app.appendChild(_createDueDateElement(todo.getDueDate()));
 
-    col1.appendChild(h4_1);
-    col2.appendChild(h4_2);
-    row1.appendChild(col1);
-    row1.appendChild(col2);
+    //create todo priority heading
+    app.appendChild(_createHeading("Priority"));
 
-    //create row for todo description
-    const row2 = document.createElement("div");
-    row2.classList.add("row");
+    //create todo priority element
+    app.appendChild(_createPriorityElement(todo.getPriority()));
 
-    const col3 = document.createElement("div");
-    col3.classList.add("col-3");
+    //create todo edit/delete button element
+    app.appendChild(_createTodoEditDelete(todo));
+  }
 
-    const col4 = document.createElement("div");
-    col4.classList.add("col-9");
+  function _createTodoHeading(title){
+    const row = document.createElement("div");
+    row.classList.add("row");
 
-    const pDescription_1 = document.createElement('p');
-    pDescription_1.innerHTML = "description:";
-    pDescription_1.classList.add("text-right");
+    const col = document.createElement("div");
+    col.classList.add("col-12");
 
-    const pDescription_2 = document.createElement('p');
-    pDescription_2.innerHTML = todo.getDescription();
-    pDescription_2.classList.add("text-left");
+    const h4 = document.createElement('h4');
+    h4.innerHTML = "Todo: " + title;
+    h4.classList.add("text-center","fw-bold");
 
-    col3.appendChild(pDescription_1);
-    col4.appendChild(pDescription_2);
-    row2.appendChild(col3);
-    row2.appendChild(col4);
+    col.appendChild(h4);
+    row.appendChild(col);
 
-    //create row for todo due date
-    const row3 = document.createElement("div");
-    row3.classList.add("row");
+    return row;
+  }
 
-    const col5 = document.createElement("div");
-    col5.classList.add("col-3");
+  function _createHeading(text){
+    const row = document.createElement("div");
+    row.classList.add("row","pb-0");
 
-    const col6 = document.createElement("div");
-    col6.classList.add("col-9");
+    const col = document.createElement("div");
+    col.classList.add("col-12");
 
-    const pDueDate_1 = document.createElement('p');
-    pDueDate_1.classList.add("text-right");
-    pDueDate_1.innerHTML = "due date:";
+    const p = document.createElement('p');
+    p.innerHTML = text;
+    p.classList.add("text-center","text-underline");
 
-    const pDueDate_2 = document.createElement('p');
-    pDueDate_2.classList.add("text-left");
+    col.appendChild(p);
+    row.appendChild(col);
 
-    if(todo.getDueDate()){
-      pDueDate_2.innerHTML = todo.getDueDate();
+    return row;
+  }
+
+  function _createElement(text){
+    const row = document.createElement("div");
+    row.classList.add("row");
+
+    const col = document.createElement("div");
+    col.classList.add("col-12");
+
+    const p = document.createElement('p');
+    p.innerHTML = text;
+    p.classList.add("text-center","mb-3");
+
+    col.appendChild(p);
+    row.appendChild(col);
+
+    return row;
+  }
+
+  function _createDueDateElement(text){
+    const row = document.createElement("div");
+    row.classList.add("row");
+
+    const col = document.createElement("div");
+    col.classList.add("col-12");
+
+    const p = document.createElement('p');
+    p.classList.add("text-center","mb-3");
+
+    if(text.length === 0){
+      p.innerHTML = "n/a";
     } else {
-      pDueDate_2.innerHTML = "n/a";
+      p.innerHTML = text;
     }
 
-    col5.appendChild(pDueDate_1);
-    col6.appendChild(pDueDate_2);
-    row3.appendChild(col5);
-    row3.appendChild(col6);
+    col.appendChild(p);
+    row.appendChild(col);
 
-    //create row for todo priority
-    const row4 = document.createElement("div");
-    row4.classList.add("row");
+    return row;
+  }
 
-    const col7 = document.createElement("div");
-    col7.classList.add("col-3");
+  function _createPriorityElement(text){
+    const row = document.createElement("div");
+    row.classList.add("row");
 
-    const col8 = document.createElement("div");
-    col8.classList.add("col-9");
+    const col = document.createElement("div");
+    col.classList.add("col-12");
 
-    const pPriority_1 = document.createElement('p');
-    pPriority_1.classList.add("text-right");
-    pPriority_1.innerHTML = "priority:";
+    const p = document.createElement('p');
+    p.classList.add("text-center","mb-3");
+    p.innerHTML = text;
 
-    const pPriority_2 = document.createElement('p');
-    pPriority_2.classList.add("text-left");
-    pPriority_2.innerHTML = todo.getPriority();
-
-    if(todo.getPriority() === 'medium'){
-      pPriority_2.classList.add("text-orange");
-    } else if (todo.getPriority() === 'high'){
-      pPriority_2.classList.add("text-red");
+    if(text === 'medium'){
+      p.classList.add("text-orange");
+    } else if (text === 'high'){
+      p.classList.add("text-red");
     }
 
-    col7.appendChild(pPriority_1);
-    col8.appendChild(pPriority_2);
-    row4.appendChild(col7);
-    row4.appendChild(col8);
+    col.appendChild(p);
+    row.appendChild(col);
 
-    //create row for todo edit/delete buttons
-    const row5 = document.createElement("div");
-    row5.classList.add("row");
+    return row;
+  }
 
-    const col9 = document.createElement("div");
-    col9.classList.add("col-12","display-flex","justify-center");
+  function _createTodoEditDelete(todo){
+    const row = document.createElement("div");
+    row.classList.add("row");
+
+    const col = document.createElement("div");
+    col.classList.add("col-12","display-flex","justify-center");
 
     const editI = document.createElement("i");
     editI.setAttribute("data-todo-id",todo.getId());
@@ -132,16 +150,11 @@ const TodoShowView = (function(){
     deleteI.setAttribute("id","delete");
     deleteI.classList.add("fas","fa-trash-alt","cursor-pointer","ml-1");
 
-    col9.appendChild(editI);
-    col9.appendChild(deleteI);
-    row5.appendChild(col9);
-    
-    //append rows to app container
-    app.appendChild(row1);
-    app.appendChild(row2);
-    app.appendChild(row3);
-    app.appendChild(row4);
-    app.appendChild(row5);
+    col.appendChild(editI);
+    col.appendChild(deleteI);
+    row.appendChild(col);
+
+    return row;
   }
 
   function _createBackLink(projectId){

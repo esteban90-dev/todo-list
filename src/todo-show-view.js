@@ -11,28 +11,61 @@ const TodoShowView = (function(){
     //display 'back to projects' link
     app.appendChild(_createBackLink(todo.getProjectId()));
 
+    //display todo heading (title, description, edit/delete buttons)
+    const row = document.createElement("div");
+    row.classList.add("row","justify-end");
+
+    const col1 = document.createElement("div");
+    col1.classList.add("col-8");
+
+    const col2 = document.createElement("div");
+    col2.classList.add("col-2","display-flex","justify-between","align-center");
+
     const h4 = document.createElement('h4');
-    h4.innerHTML = todo.getTitle();
+    h4.innerHTML = "todo: " + todo.getTitle();
     h4.classList.add("text-center","fw-bold","mb-3");
 
     const pDescription = document.createElement('p');
-    pDescription.innerHTML = "Description: " + todo.getDescription();
+    pDescription.innerHTML = "description: " + todo.getDescription();
     pDescription.classList.add("text-center");
+
+    col1.appendChild(h4);
+    col1.appendChild(pDescription);
+
+    const editI = document.createElement("i");
+    editI.setAttribute("data-todo-id",todo.getId());
+    editI.setAttribute("id","edit");
+    editI.classList.add("fas","fa-pencil-alt","cursor-pointer");
+
+    const deleteI = document.createElement("i");
+    deleteI.setAttribute("data-todo-id",todo.getId());
+    deleteI.setAttribute("data-project-id",todo.getProjectId());
+    deleteI.setAttribute("id","delete");
+    deleteI.classList.add("fas","fa-trash-alt","cursor-pointer");
+
+    col2.appendChild(editI);
+    col2.appendChild(deleteI);
+    
+    //display due date
 
     const pDueDate = document.createElement('p');
     pDueDate.classList.add("text-center");
 
     if(todo.getDueDate()){
-      pDueDate.innerHTML = "Due Date: " + todo.getDueDate();
+      pDueDate.innerHTML = "due date: " + todo.getDueDate();
     } else {
-      pDueDate.innerHTML = "Due Date: n/a";
+      pDueDate.innerHTML = "due date: n/a";
     }
+
+    col1.appendChild(pDueDate);
+
+    //display priority
 
     const priorityDiv = document.createElement('div');
     priorityDiv.classList.add("display-flex","justify-center","align-center");
 
     const p1 = document.createElement('p');
-    p1.innerHTML = "Priority:";
+    p1.innerHTML = "priority:";
 
     const p2= document.createElement('p');
     p2.innerHTML = todo.getPriority();
@@ -47,10 +80,12 @@ const TodoShowView = (function(){
     priorityDiv.appendChild(p1);
     priorityDiv.appendChild(p2);
 
-    app.appendChild(h4);
-    app.appendChild(pDescription);
-    app.appendChild(pDueDate);
-    app.appendChild(priorityDiv);
+    col1.appendChild(priorityDiv);
+
+    row.appendChild(col1);
+    row.appendChild(col2);
+
+    app.appendChild(row);
   }
 
   function _createBackLink(projectId){
@@ -75,12 +110,28 @@ const TodoShowView = (function(){
     return row;
   }
 
+  function handleClickEditTodo(handler){
+    const editLinks = document.querySelectorAll("#edit");
+
+    editLinks.forEach( (button) => { 
+      button.addEventListener('click', handler) 
+    });
+  }
+
+  function handleClickDeleteTodo(handler){
+    const deleteLinks = document.querySelectorAll("#delete");
+
+    deleteLinks.forEach( (button) => { 
+      button.addEventListener('click', handler); 
+    });
+  }
+
   function handleClickBack(handler){
     const back = document.querySelector("#back");
     back.addEventListener('click', handler);
   }
 
-  return { render, handleClickBack };
+  return { render, handleClickBack, handleClickEditTodo, handleClickDeleteTodo, };
 })(clearChildren);
 
 export default TodoShowView

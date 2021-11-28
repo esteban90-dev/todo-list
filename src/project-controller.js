@@ -159,8 +159,8 @@ const ProjectController = (function(){
     if (todos.length > 0){
       projectShowView.handleCheckTodo(controllerInterface.getTodoComplete());
       projectShowView.handleClickShowTodo(controllerInterface.getTodoShow());
-      projectShowView.handleClickEditTodo(controllerInterface.getTodoEdit());
-      projectShowView.handleClickDeleteTodo(controllerInterface.getTodoDestroy());
+      //projectShowView.handleClickEditTodo(controllerInterface.getTodoEdit());
+      //projectShowView.handleClickDeleteTodo(controllerInterface.getTodoDestroy());
     }
   }
 

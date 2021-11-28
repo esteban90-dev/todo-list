@@ -81,7 +81,7 @@ const TodoIndexView = (function(){
       for(let i=0; i<todos.length; i++){
         //create row to contain todo in 
         const row = document.createElement("div");
-        row.classList.add("row");
+        row.classList.add("row","justify-center");
 
         //create todo complete checkbox
         let checkBox = document.createElement("input");
@@ -124,24 +124,6 @@ const TodoIndexView = (function(){
         p2.classList.add("text-gray-600");
         col2.appendChild(p2);
         row.appendChild(col2);
-
-        //create todo edit/delete links, add to column, then add to row
-        const editI = document.createElement("i");
-        editI.setAttribute("data-todo-id",todos[i].getId());
-        editI.setAttribute("id","edit");
-        editI.classList.add("fas","fa-pencil-alt","cursor-pointer");
-
-        const deleteI = document.createElement("i");
-        deleteI.setAttribute("data-todo-id",todos[i].getId());
-        deleteI.setAttribute("data-project-id",todos[i].getProjectId());
-        deleteI.setAttribute("id","delete");
-        deleteI.classList.add("fas","fa-trash-alt","cursor-pointer");
-
-        const col3 = document.createElement("div");
-        col3.classList.add("col-2","display-flex","justify-between","align-center");
-        col3.appendChild(editI);
-        col3.appendChild(deleteI);
-        row.appendChild(col3);
 
         //add row to div
         div.appendChild(row);
@@ -214,22 +196,6 @@ const TodoIndexView = (function(){
     });
   }
 
-  function handleClickEditTodo(handler){
-    const editLinks = document.querySelectorAll("#edit");
-
-    editLinks.forEach( (button) => { 
-      button.addEventListener('click', handler) 
-    });
-  }
-
-  function handleClickDeleteTodo(handler){
-    const deleteLinks = document.querySelectorAll("#delete");
-
-    deleteLinks.forEach( (button) => { 
-      button.addEventListener('click', handler); 
-    });
-  }
-
   function handleClickNewTodo(handler){
     document.querySelector("#new").addEventListener('click', handler);
   }
@@ -242,7 +208,7 @@ const TodoIndexView = (function(){
     });
   }
 
-  return { render, handleClickBack, handleClickEditProject, handleClickDeleteProject, handleClickEditTodo, handleClickDeleteTodo, handleClickNewTodo, handleCheckTodo, handleClickShowTodo };
+  return { render, handleClickBack, handleClickEditProject, handleClickDeleteProject, handleClickNewTodo, handleCheckTodo, handleClickShowTodo };
 })(clearChildren);
 
 export default TodoIndexView;

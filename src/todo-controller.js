@@ -83,8 +83,8 @@ const TodoController = (function(){
     //update the existing todo
     TodoModel.update(todoId, title, description, dueDate, priority);
 
-    //render the project show view
-    controllerInterface.getProjectShow()(event);
+    //render the todo show view
+    show(event);
   }
 
   function destroy(event){
@@ -126,6 +126,8 @@ const TodoController = (function(){
   function _bindShowButtons(){
     //bind buttons to appropriate controller methods
     todoShowView.handleClickBack(controllerInterface.getProjectShow());
+    todoShowView.handleClickEditTodo(edit);
+    todoShowView.handleClickDeleteTodo(destroy);
   }
 
   function _bindEditButtons(){

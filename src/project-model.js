@@ -9,6 +9,9 @@ const ProjectModel = (function(){
   //retrieve project data from localStorage
   _retrieve();
 
+  //create defaut project if no projects exist
+  _createDefaut();
+
   function create(title, description){
     //create new project
     const project = projectFactory(title, description);
@@ -69,9 +72,17 @@ const ProjectModel = (function(){
     //retrieve project data from local storage and re-instantiate project objects
     if(storage.isAvailable('localStorage')){ // test for local storage support
       let projectData = JSON.parse(localStorage.getItem("projects"));
-      projectData.forEach( (item) => {
-        create(item.title, item.description);
-      });
+      if(projectData){
+        projectData.forEach( (item) => {
+          create(item.title, item.description);
+        });
+      }
+    }
+  }
+
+  function _createDefaut(){
+    if (projects.length === 0){
+      create("defaut","n/a");
     }
   }
 

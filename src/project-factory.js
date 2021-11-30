@@ -26,7 +26,14 @@ function ProjectFactory(title, description){
     return id;
   }
 
-  return { getTitle, getDescription, setTitle, setDescription, getId }
+  function toJSON(){
+    return {
+      title: title,
+      description: description
+    };
+  }
+
+  return { getTitle, getDescription, setTitle, setDescription, getId, toJSON }
 }
 
 export default ProjectFactory;

@@ -91,6 +91,12 @@ const TodoIndexView = (function(){
     div.appendChild(row3);
     div.appendChild(row4);
 
+    //add horizontal rule
+    const rule = document.createElement("hr");
+    rule.classList.add("text-black");
+    div.appendChild(rule);
+
+
     return div;
   }
 

@@ -12,9 +12,11 @@ const ProjectModel = (function(){
   //create defaut project if no projects exist
   _createDefaut();
 
-  function create(title, description){
+  function create(title, description, id = null){
     //create new project
-    const project = projectFactory(title, description);
+    const project = projectFactory(title, description, id);
+
+    console.log("created object with title: " + title + ", description: " + description + ", and id: " + id);
 
     //store new project in project array
     projects.push(project);
@@ -74,10 +76,24 @@ const ProjectModel = (function(){
       let projectData = JSON.parse(localStorage.getItem("projects"));
       if(projectData){
         projectData.forEach( (item) => {
-          create(item.title, item.description);
+          create(item.title, item.description, item.id);
         });
+        //after projects have been reinstantiated, set the numInstances to the highest project id #
+        //so new objects have distinct ids
+        projectFactory.numInstances = _getMaxProjectId();
       }
     }
+  }
+
+  function _getMaxProjectId(){
+    //return the highest project id #
+    var temp = 0;
+    projects.forEach( (project) => {
+      if (project.getId() > temp){
+        temp = project.getId();
+      }
+    });
+    return temp;
   }
 
   function _createDefaut(){

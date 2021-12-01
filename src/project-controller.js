@@ -164,7 +164,7 @@ const ProjectController = (function(){
     }
   }
 
-  return { initialize, show };
+  return { initialize, index, show };
 })(ProjectModel, TodoModel, ProjectIndexView, ProjectNewView, ProjectShowView, ProjectEditView, ControllerInterface);
 
 export default ProjectController;

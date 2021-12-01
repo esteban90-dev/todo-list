@@ -7,8 +7,15 @@ import Storage from './storage.js';
 ProjectController.initialize();
 TodoController.initialize();
 
-//when the page first loads, display the 'default' project
-ProjectController.show(1);
+//when the page first loads, display the first project if projects are available,
+//otherwise display the project index
+
+if(ProjectModel.getProjects().length > 0){
+  ProjectController.show(1);
+} else {
+  ProjectController.index();
+}
+
 
 
 

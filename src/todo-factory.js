@@ -10,8 +10,6 @@ function TodoFactory(title, description, dueDate, priority, projectId, isComplet
   TodoFactory.numInstances = (TodoFactory.numInstances || 0) + 1;
   id ||= TodoFactory.numInstances;
 
-  console.log("created todo " + title + ", with id: " + id + ", and projectId: " + projectId);
-
   function getTitle(){
     return title;
   }

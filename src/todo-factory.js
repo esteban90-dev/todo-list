@@ -1,11 +1,11 @@
-function TodoFactory(title, description, dueDate, priority, projectId){
+function TodoFactory(title, description, dueDate, priority, projectId, isComplete, id){
   var title = title;
   var description = description;
   var dueDate = dueDate;
   var priority = priority;
-  var id;
+  var id = id;
   var projectId = projectId;
-  var isComplete = false;
+  var isComplete = isComplete;
 
   TodoFactory.numInstances = (TodoFactory.numInstances || 0) + 1;
   id ||= TodoFactory.numInstances;
@@ -62,7 +62,19 @@ function TodoFactory(title, description, dueDate, priority, projectId){
     return id;
   }
 
-  return { getTitle, setTitle, getDescription, setDescription, getDueDate, setDueDate, getPriority, setPriority, getIsComplete, setComplete, setIncomplete, getProjectId, getId };
+  function toJSON(){
+    return {
+      title: title,
+      description: description,
+      dueDate: dueDate,
+      priority: priority,
+      id: id,
+      projectId: projectId,
+      isComplete: isComplete
+    };
+  }
+
+  return { getTitle, setTitle, getDescription, setDescription, getDueDate, setDueDate, getPriority, setPriority, getIsComplete, setComplete, setIncomplete, getProjectId, getId, toJSON };
 }
 
 export default TodoFactory;

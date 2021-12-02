@@ -43,7 +43,7 @@ const TodoController = (function(){
     const projectId = parseInt(event.target.getAttribute("data-project-id"));
 
     //create new todo
-    TodoModel.create(title, description, dueDate, priority, projectId);
+    TodoModel.create(title, description, dueDate, priority, projectId, false);
 
     //render the project show view
     controllerInterface.getProjectShow()(event);
@@ -104,13 +104,13 @@ const TodoController = (function(){
 
   function complete(event){
     const todoId = parseInt(event.target.getAttribute("data-todo-id"));
-    const todo = TodoModel.read(todoId);
+    const todo = todoModel.read(todoId);
 
     //if todo is complete, then mark incomplete.  if todo is incomplete, then mark complete
     if(todo.getIsComplete()){
-      todo.setIncomplete();
+      todoModel.setIncomplete(todoId);
     } else { 
-      todo.setComplete();
+      todoModel.setComplete(todoId);
     }
 
     //render the project show view
